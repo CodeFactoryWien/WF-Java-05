@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 14. Jan 2020 um 14:39
--- Server-Version: 10.1.38-MariaDB
--- PHP-Version: 7.3.2
+-- Erstellungszeit: 14. Jan 2020 um 15:43
+-- Server-Version: 10.4.10-MariaDB
+-- PHP-Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `feelgoodltd`
+-- Datenbank: `feeldgoodltd`
 --
 
 -- --------------------------------------------------------
@@ -36,6 +36,16 @@ CREATE TABLE `client` (
   `clientphone` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `shippingarea` varchar(10) COLLATE utf8_german2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+--
+-- Daten für Tabelle `client`
+--
+
+INSERT INTO `client` (`clientID`, `clientname`, `clientaddress`, `clientemail`, `clientphone`, `shippingarea`) VALUES
+(1, 'Mister', 'Hemp', 'hemp@green.com', '+4366412349330', 'NORD'),
+(2, 'Super', 'Trooper', 'trooper@deathstar.com', '+43680596404', 'OST'),
+(3, 'Daniela', 'Tunichtgut', 'unfug@bledsinn.com', '+436763049404', 'SÜD'),
+(4, 'John', 'Wick', 'john@wick.com', '+436649787775', 'WEST');
 
 -- --------------------------------------------------------
 
@@ -160,7 +170,7 @@ ALTER TABLE `client`
 --
 ALTER TABLE `dispatcher`
   ADD PRIMARY KEY (`dispatcherID`),
-  ADD KEY `orderID` (`orderID`);
+  ADD KEY `orderID` (`orderID`) USING BTREE;
 
 --
 -- Indizes für die Tabelle `manufacturer`
@@ -217,13 +227,13 @@ ALTER TABLE `staffmember`
 -- AUTO_INCREMENT für Tabelle `client`
 --
 ALTER TABLE `client`
-  MODIFY `clientID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `clientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `dispatcher`
 --
 ALTER TABLE `dispatcher`
-  MODIFY `dispatcherID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `dispatcherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT für Tabelle `manufacturer`
@@ -235,7 +245,7 @@ ALTER TABLE `manufacturer`
 -- AUTO_INCREMENT für Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `product`
