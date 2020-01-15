@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Jan 2020 um 09:43
--- Server-Version: 10.4.10-MariaDB
--- PHP-Version: 7.3.12
+-- Erstellungszeit: 15. Jan 2020 um 10:39
+-- Server-Version: 10.1.38-MariaDB
+-- PHP-Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `feeldgoodltd`
+-- Datenbank: `feelgoodltd`
 --
 
 -- --------------------------------------------------------
@@ -63,6 +63,29 @@ CREATE TABLE `dispatcher` (
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `dispatcherclient`
+--
+
+CREATE TABLE `dispatcherclient` (
+  `dispatcherID_FK` int(11) NOT NULL,
+  `clientID_FK` int(11) NOT NULL,
+  `clientaddress` varchar(40) COLLATE utf8_german2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `dispatcherorder`
+--
+
+CREATE TABLE `dispatcherorder` (
+  `dispatcherID_FK` int(11) NOT NULL,
+  `orderID_FK` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `manufacturer`
 --
 
@@ -84,6 +107,29 @@ INSERT INTO `manufacturer` (`manuID`, `manuname`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabellenstruktur für Tabelle `orderamount`
+--
+
+CREATE TABLE `orderamount` (
+  `amountID` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `orderlistID_FK` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `orderlist`
+--
+
+CREATE TABLE `orderlist` (
+  `orderlistID` int(11) NOT NULL,
+  `orderID_FK` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Tabellenstruktur für Tabelle `ordertab`
 --
 
@@ -92,7 +138,7 @@ CREATE TABLE `ordertab` (
   `total` int(11) NOT NULL,
   `date` date NOT NULL,
   `clientID` int(11) NOT NULL,
-  `shippingTeam` varchar(20) COLLATE utf8_german2_ci NOT NULL
+  `shippingteamID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 -- --------------------------------------------------------
@@ -124,12 +170,12 @@ INSERT INTO `product` (`productID`, `status`, `amount`, `bulkprice`, `category`,
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `productorder`
+-- Tabellenstruktur für Tabelle `productorderlist`
 --
 
-CREATE TABLE `productorder` (
+CREATE TABLE `productorderlist` (
   `productID_FK` int(11) NOT NULL,
-  `orderID_FK` int(11) NOT NULL
+  `orderlistID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 -- --------------------------------------------------------
@@ -141,19 +187,18 @@ CREATE TABLE `productorder` (
 CREATE TABLE `shippingteam` (
   `shippingteamID` int(11) NOT NULL,
   `teamname` varchar(30) COLLATE utf8_german2_ci NOT NULL,
-  `shippingarea` varchar(10) COLLATE utf8_german2_ci NOT NULL,
-  `staffID` int(11) NOT NULL
+  `shippingarea` varchar(10) COLLATE utf8_german2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 --
 -- Daten für Tabelle `shippingteam`
 --
 
-INSERT INTO `shippingteam` (`shippingteamID`, `teamname`, `shippingarea`, `staffID`) VALUES
-(1, 'A', 'NORD', 1),
-(2, 'B', 'OST', 2),
-(3, 'C', 'SÜD', 3),
-(4, 'D', 'WEST', 4);
+INSERT INTO `shippingteam` (`shippingteamID`, `teamname`, `shippingarea`) VALUES
+(1, 'A', 'NORD'),
+(2, 'B', 'OST'),
+(3, 'C', 'SÜD'),
+(4, 'D', 'WEST');
 
 -- --------------------------------------------------------
 
@@ -179,18 +224,19 @@ CREATE TABLE `staffmember` (
   `staffemail` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `staffaddress` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `staffsvnumber` int(11) NOT NULL,
-  `role` varchar(30) COLLATE utf8_german2_ci NOT NULL
+  `role` varchar(30) COLLATE utf8_german2_ci NOT NULL,
+  `shippingteamID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 --
 -- Daten für Tabelle `staffmember`
 --
 
-INSERT INTO `staffmember` (`staffID`, `staffname`, `staffphone`, `staffemail`, `staffaddress`, `staffsvnumber`, `role`) VALUES
-(1, 'Test Dummie', '+01707504', 'ÍT@feeldgood.com', 'Poldergasse 5, 8020 Graz', 1234442342, 'IT'),
-(2, 'Max Mustermann', '+018493303', 'max@feeldgood.com', 'Musterplatz 45, 1100 Wien', 1876123456, 'Accounting'),
-(3, 'Mister Muster', '+019987665', 'Mister@feeldgood.com', 'Hohlplatz 34, 1200 Wien', 2147483647, 'Sales'),
-(4, 'Olaf Dodo', '+01845642', 'olaf@olaf.de', 'Musterplatz 122, 5040 Salzburg', 6723333, 'Sales');
+INSERT INTO `staffmember` (`staffID`, `staffname`, `staffphone`, `staffemail`, `staffaddress`, `staffsvnumber`, `role`, `shippingteamID`) VALUES
+(1, 'Test Dummie', '+01707504', 'ÍT@feeldgood.com', 'Poldergasse 5, 8020 Graz', 1234442342, 'IT', 1),
+(2, 'Max Mustermann', '+018493303', 'max@feeldgood.com', 'Musterplatz 45, 1100 Wien', 1876123456, 'Accounting', 2),
+(3, 'Mister Muster', '+019987665', 'Mister@feeldgood.com', 'Hohlplatz 34, 1200 Wien', 2147483647, 'Sales', 3),
+(4, 'Olaf Dodo', '+01845642', 'olaf@olaf.de', 'Musterplatz 122, 5040 Salzburg', 6723333, 'Sales', 4);
 
 --
 -- Indizes der exportierten Tabellen
@@ -210,17 +256,46 @@ ALTER TABLE `dispatcher`
   ADD KEY `orderID` (`orderID`) USING BTREE;
 
 --
+-- Indizes für die Tabelle `dispatcherclient`
+--
+ALTER TABLE `dispatcherclient`
+  ADD UNIQUE KEY `dispatcherID_FK` (`dispatcherID_FK`,`clientID_FK`),
+  ADD KEY `clientID_FK` (`clientID_FK`);
+
+--
+-- Indizes für die Tabelle `dispatcherorder`
+--
+ALTER TABLE `dispatcherorder`
+  ADD UNIQUE KEY `dispatcherID_FK` (`dispatcherID_FK`,`orderID_FK`),
+  ADD KEY `orderID_FK` (`orderID_FK`);
+
+--
 -- Indizes für die Tabelle `manufacturer`
 --
 ALTER TABLE `manufacturer`
   ADD PRIMARY KEY (`manuID`);
 
 --
+-- Indizes für die Tabelle `orderamount`
+--
+ALTER TABLE `orderamount`
+  ADD PRIMARY KEY (`amountID`),
+  ADD KEY `orderlistID_FK` (`orderlistID_FK`);
+
+--
+-- Indizes für die Tabelle `orderlist`
+--
+ALTER TABLE `orderlist`
+  ADD PRIMARY KEY (`orderlistID`),
+  ADD KEY `orderID_FK` (`orderID_FK`);
+
+--
 -- Indizes für die Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
   ADD PRIMARY KEY (`orderID`),
-  ADD KEY `clientID` (`clientID`);
+  ADD KEY `clientID` (`clientID`),
+  ADD KEY `shippingteamID_FK` (`shippingteamID_FK`);
 
 --
 -- Indizes für die Tabelle `product`
@@ -230,18 +305,17 @@ ALTER TABLE `product`
   ADD KEY `manuID` (`manuID`);
 
 --
--- Indizes für die Tabelle `productorder`
+-- Indizes für die Tabelle `productorderlist`
 --
-ALTER TABLE `productorder`
-  ADD UNIQUE KEY `productID_FK` (`productID_FK`,`orderID_FK`),
-  ADD KEY `orderID_FK` (`orderID_FK`);
+ALTER TABLE `productorderlist`
+  ADD KEY `orderlistID_FK` (`orderlistID_FK`),
+  ADD KEY `productID_FK` (`productID_FK`);
 
 --
 -- Indizes für die Tabelle `shippingteam`
 --
 ALTER TABLE `shippingteam`
-  ADD PRIMARY KEY (`shippingteamID`),
-  ADD KEY `staffID` (`staffID`);
+  ADD PRIMARY KEY (`shippingteamID`);
 
 --
 -- Indizes für die Tabelle `shippinteamproduct`
@@ -254,7 +328,8 @@ ALTER TABLE `shippinteamproduct`
 -- Indizes für die Tabelle `staffmember`
 --
 ALTER TABLE `staffmember`
-  ADD PRIMARY KEY (`staffID`);
+  ADD PRIMARY KEY (`staffID`),
+  ADD KEY `shippingteamID` (`shippingteamID`);
 
 --
 -- AUTO_INCREMENT für exportierte Tabellen
@@ -277,6 +352,18 @@ ALTER TABLE `dispatcher`
 --
 ALTER TABLE `manufacturer`
   MODIFY `manuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT für Tabelle `orderamount`
+--
+ALTER TABLE `orderamount`
+  MODIFY `amountID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `orderlist`
+--
+ALTER TABLE `orderlist`
+  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT für Tabelle `ordertab`
@@ -313,10 +400,37 @@ ALTER TABLE `dispatcher`
   ADD CONSTRAINT `dispatcher_ibfk_1` FOREIGN KEY (`orderID`) REFERENCES `ordertab` (`orderID`);
 
 --
+-- Constraints der Tabelle `dispatcherclient`
+--
+ALTER TABLE `dispatcherclient`
+  ADD CONSTRAINT `dispatcherclient_ibfk_1` FOREIGN KEY (`clientID_FK`) REFERENCES `client` (`clientID`),
+  ADD CONSTRAINT `dispatcherclient_ibfk_2` FOREIGN KEY (`dispatcherID_FK`) REFERENCES `dispatcher` (`dispatcherID`);
+
+--
+-- Constraints der Tabelle `dispatcherorder`
+--
+ALTER TABLE `dispatcherorder`
+  ADD CONSTRAINT `dispatcherorder_ibfk_1` FOREIGN KEY (`dispatcherID_FK`) REFERENCES `dispatcher` (`dispatcherID`),
+  ADD CONSTRAINT `dispatcherorder_ibfk_2` FOREIGN KEY (`orderID_FK`) REFERENCES `ordertab` (`orderID`);
+
+--
+-- Constraints der Tabelle `orderamount`
+--
+ALTER TABLE `orderamount`
+  ADD CONSTRAINT `orderamount_ibfk_1` FOREIGN KEY (`orderlistID_FK`) REFERENCES `orderlist` (`orderlistID`);
+
+--
+-- Constraints der Tabelle `orderlist`
+--
+ALTER TABLE `orderlist`
+  ADD CONSTRAINT `orderlist_ibfk_1` FOREIGN KEY (`orderID_FK`) REFERENCES `ordertab` (`orderID`);
+
+--
 -- Constraints der Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
-  ADD CONSTRAINT `ordertab_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`);
+  ADD CONSTRAINT `ordertab_ibfk_1` FOREIGN KEY (`clientID`) REFERENCES `client` (`clientID`),
+  ADD CONSTRAINT `ordertab_ibfk_2` FOREIGN KEY (`shippingteamID_FK`) REFERENCES `shippingteam` (`shippingteamID`);
 
 --
 -- Constraints der Tabelle `product`
@@ -325,17 +439,11 @@ ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`manuID`) REFERENCES `manufacturer` (`manuID`);
 
 --
--- Constraints der Tabelle `productorder`
+-- Constraints der Tabelle `productorderlist`
 --
-ALTER TABLE `productorder`
-  ADD CONSTRAINT `productorder_ibfk_1` FOREIGN KEY (`orderID_FK`) REFERENCES `ordertab` (`orderID`),
-  ADD CONSTRAINT `productorder_ibfk_2` FOREIGN KEY (`productID_FK`) REFERENCES `product` (`productID`);
-
---
--- Constraints der Tabelle `shippingteam`
---
-ALTER TABLE `shippingteam`
-  ADD CONSTRAINT `shippingteam_ibfk_1` FOREIGN KEY (`staffID`) REFERENCES `staffmember` (`staffID`);
+ALTER TABLE `productorderlist`
+  ADD CONSTRAINT `productorderlist_ibfk_1` FOREIGN KEY (`orderlistID_FK`) REFERENCES `orderlist` (`orderlistID`),
+  ADD CONSTRAINT `productorderlist_ibfk_2` FOREIGN KEY (`productID_FK`) REFERENCES `product` (`productID`);
 
 --
 -- Constraints der Tabelle `shippinteamproduct`
@@ -343,6 +451,12 @@ ALTER TABLE `shippingteam`
 ALTER TABLE `shippinteamproduct`
   ADD CONSTRAINT `shippinteamproduct_ibfk_1` FOREIGN KEY (`productID_FK`) REFERENCES `product` (`productID`),
   ADD CONSTRAINT `shippinteamproduct_ibfk_2` FOREIGN KEY (`shippingteamID_FK`) REFERENCES `shippingteam` (`shippingteamID`);
+
+--
+-- Constraints der Tabelle `staffmember`
+--
+ALTER TABLE `staffmember`
+  ADD CONSTRAINT `staffmember_ibfk_1` FOREIGN KEY (`shippingteamID`) REFERENCES `shippingteam` (`shippingteamID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
