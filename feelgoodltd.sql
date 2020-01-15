@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Jan 2020 um 14:33
+-- Erstellungszeit: 15. Jan 2020 um 15:10
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -43,21 +43,21 @@ CREATE TABLE `client` (
 
 INSERT INTO `client` (`clientID`, `clientname`, `clientaddress`, `clientemail`, `clientphone`, `shippingarea`) VALUES
 (1, 'Mister Hemp', 'Landstraße 72, 4020 Linz', 'hemp@green.com', '+4366412349330', 'NORD'),
-(2, 'Super Trooper', 'Weitwegweg 999, 9020 Klagenfurt', 'trooper@deathstar.com', '+43680596404', 'OST'),
-(3, 'Daniela Tunichtgut', 'Josefgasse 11, 7020 Loipersbach', 'unfug@bledsinn.com', '+436763049404', 'SÜD'),
+(2, 'Super Trooper', 'Weitwegweg 999, 1060 Wien', 'trooper@deathstar.com', '+43680596404', 'OST'),
+(3, 'Daniela Tunichtgut', 'Josefgasse 11, 9020 Klagenfurt', 'unfug@bledsinn.com', '+436763049404', 'SÜD'),
 (4, 'John Wick', 'Brennendes Höllentor 666, 6020 Innsbruck', 'john@wick.com', '+436649787775', 'WEST'),
-(5, 'Matthias Riedl', 'Kettenbrückengasse 23, 1050 Wien', 'matthias.riedl@expleo.com', '+43664523449', 'NORD'),
+(5, 'Matthias Riedl', 'Kettenbrückengasse 23, 4020 Linz', 'matthias.riedl@expleo.com', '+43664523449', 'NORD'),
 (6, 'Wolfgang Figl', 'Musterweg 34, 1040 Wien', 'wolfgang.figl@expleo.com', '+436761234098', 'OST'),
-(7, 'Markus Gehbauer', 'Keltengasse 4, 1230 Wien', 'mgehbauer@gmail.com', '+436992348906', 'SÜD'),
-(8, 'Marion Herms', 'Gertergasse 87, 8020 Graz', 'herms@gmail.com', '+4368012367593', 'WEST'),
-(9, 'Daniela Suchny', 'Reiterweg 4, 1080 Wien', 'danisuchny@gmail.com', '+436804356777', 'NORD'),
+(7, 'Markus Gehbauer', 'Keltengasse 4, 9020 Klagenfurt', 'mgehbauer@gmail.com', '+436992348906', 'SÜD'),
+(8, 'Marion Herms', 'Gertergasse 87, 6020 Innsbruck', 'herms@gmail.com', '+4368012367593', 'WEST'),
+(9, 'Daniela Suchny', 'Reiterweg 4, 4020 Linz', 'danisuchny@gmail.com', '+436804356777', 'NORD'),
 (10, 'Peter Suchny', 'Reiterweg 4, 1080 Wien', 'petersuchny@gmail.com', '+436804829437', 'OST'),
-(11, 'Edmund Sackbauer', 'Hasengasse 38, 1010 Wien', 'mundl@gmail.com', '+4367687345690', 'SÜD'),
-(12, 'Otto Bauer', 'Josef-Messner-Straße 12, 5020 Salzburg', 'ottob@gmx.at', '+43664130303', 'WEST'),
+(11, 'Edmund Sackbauer', 'Hasengasse 38, 9020 Klagenfurt', 'mundl@gmail.com', '+4367687345690', 'SÜD'),
+(12, 'Otto Bauer', 'Josef-Messner-Straße 12, 6020 Innsbruck', 'ottob@gmx.at', '+43664130303', 'WEST'),
 (13, 'Hermine Granger', 'Muggelweg 45, 4020 Linz', 'hermineg@wizzard.wz', '+436993567544', 'NORD'),
-(14, 'Dobby Elf', 'Winkelgasse 1, 6850', 'dobbyelf@gmail.com', '+436808887754', 'OST'),
-(15, 'Martina Haselnuss', 'Nussgasse 42, 3390 Melk', 'nusserl@spongebob.com', '+4366022233444', 'SÜD'),
-(16, 'Sigmund Ferdanz', 'Stummergasse 6, 1220 Wien', 'sigi@hotmail.com', '+43664122233', 'WEST');
+(14, 'Dobby Elf', 'Winkelgasse 1, 1210 Wien', 'dobbyelf@gmail.com', '+436808887754', 'OST'),
+(15, 'Martina Haselnuss', 'Nussgasse 42, 9020 Klagenfurt', 'nusserl@spongebob.com', '+4366022233444', 'SÜD'),
+(16, 'Sigmund Ferdanz', 'Stummergasse 6, 6020 Innsbruck', 'sigi@hotmail.com', '+43664122233', 'WEST');
 
 -- --------------------------------------------------------
 
@@ -98,7 +98,21 @@ CREATE TABLE `dispatcherclient` (
 
 INSERT INTO `dispatcherclient` (`dispatcherID_FK`, `clientID_FK`) VALUES
 (1, 1),
-(2, 2);
+(1, 5),
+(1, 9),
+(1, 13),
+(2, 2),
+(2, 6),
+(2, 10),
+(2, 14),
+(3, 3),
+(3, 7),
+(3, 11),
+(3, 15),
+(4, 4),
+(4, 8),
+(4, 12),
+(4, 16);
 
 -- --------------------------------------------------------
 
@@ -199,9 +213,13 @@ CREATE TABLE `ordertab` (
 
 INSERT INTO `ordertab` (`orderID`, `total`, `date`, `clientID`, `shippingteamID_FK`) VALUES
 (1, 600, '2020-01-30', 1, 1),
-(2, 799, '2020-02-12', 2, 2),
+(2, 800, '2020-02-12', 2, 2),
 (3, 600, '2020-01-30', 3, 3),
-(4, 799, '2020-02-12', 4, 4);
+(4, 100, '2020-02-12', 4, 4),
+(5, 1100, '2019-12-18', 5, 1),
+(6, 120, '2019-12-04', 6, 2),
+(7, 450, '2020-01-06', 7, 3),
+(8, 90, '2020-01-03', 8, 4);
 
 -- --------------------------------------------------------
 
@@ -453,7 +471,7 @@ ALTER TABLE `orderlist`
 -- AUTO_INCREMENT für Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT für Tabelle `product`
