@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Jan 2020 um 11:07
+-- Erstellungszeit: 15. Jan 2020 um 13:15
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -66,8 +66,8 @@ CREATE TABLE `dispatcher` (
 INSERT INTO `dispatcher` (`dispatcherID`, `dispname`, `orderID`) VALUES
 (1, 'DHL', 1),
 (2, 'GLS', 2),
-(3, 'DHL', 3),
-(4, 'GLS', 4);
+(3, 'UPS', 3),
+(4, 'Post', 4);
 
 -- --------------------------------------------------------
 
@@ -80,6 +80,14 @@ CREATE TABLE `dispatcherclient` (
   `clientID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
+--
+-- Daten für Tabelle `dispatcherclient`
+--
+
+INSERT INTO `dispatcherclient` (`dispatcherID_FK`, `clientID_FK`) VALUES
+(1, 1),
+(2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +98,14 @@ CREATE TABLE `dispatcherorder` (
   `dispatcherID_FK` int(11) NOT NULL,
   `orderID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+--
+-- Daten für Tabelle `dispatcherorder`
+--
+
+INSERT INTO `dispatcherorder` (`dispatcherID_FK`, `orderID_FK`) VALUES
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -124,6 +140,14 @@ CREATE TABLE `orderamount` (
   `orderlistID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
+--
+-- Daten für Tabelle `orderamount`
+--
+
+INSERT INTO `orderamount` (`amountID`, `amount`, `orderlistID_FK`) VALUES
+(1, 10, 1),
+(2, 5, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +158,14 @@ CREATE TABLE `orderlist` (
   `orderlistID` int(11) NOT NULL,
   `orderID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+--
+-- Daten für Tabelle `orderlist`
+--
+
+INSERT INTO `orderlist` (`orderlistID`, `orderID_FK`) VALUES
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -199,6 +231,16 @@ CREATE TABLE `productorderlist` (
   `orderlistID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
+--
+-- Daten für Tabelle `productorderlist`
+--
+
+INSERT INTO `productorderlist` (`productID_FK`, `orderlistID_FK`) VALUES
+(1, 1),
+(2, 2),
+(1, 1),
+(2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -231,6 +273,14 @@ CREATE TABLE `shippinteamproduct` (
   `shippingteamID_FK` int(11) NOT NULL,
   `productID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+--
+-- Daten für Tabelle `shippinteamproduct`
+--
+
+INSERT INTO `shippinteamproduct` (`shippingteamID_FK`, `productID_FK`) VALUES
+(1, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
@@ -342,8 +392,8 @@ ALTER TABLE `shippingteam`
 -- Indizes für die Tabelle `shippinteamproduct`
 --
 ALTER TABLE `shippinteamproduct`
-  ADD PRIMARY KEY (`shippingteamID_FK`,`productID_FK`),
-  ADD KEY `productID_FK` (`productID_FK`);
+  ADD UNIQUE KEY `shippingteamID_FK` (`shippingteamID_FK`,`productID_FK`) USING BTREE,
+  ADD UNIQUE KEY `productID_FK` (`productID_FK`) USING BTREE;
 
 --
 -- Indizes für die Tabelle `staffmember`
@@ -378,13 +428,13 @@ ALTER TABLE `manufacturer`
 -- AUTO_INCREMENT für Tabelle `orderamount`
 --
 ALTER TABLE `orderamount`
-  MODIFY `amountID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `amountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `ordertab`
