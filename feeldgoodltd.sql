@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Jan 2020 um 10:39
--- Server-Version: 10.1.38-MariaDB
--- PHP-Version: 7.3.2
+-- Erstellungszeit: 15. Jan 2020 um 11:07
+-- Server-Version: 10.4.10-MariaDB
+-- PHP-Version: 7.3.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `feelgoodltd`
+-- Datenbank: `felldgoodltd`
 --
 
 -- --------------------------------------------------------
@@ -56,9 +56,18 @@ INSERT INTO `client` (`clientID`, `clientname`, `clientaddress`, `clientemail`, 
 CREATE TABLE `dispatcher` (
   `dispatcherID` int(11) NOT NULL,
   `dispname` varchar(20) COLLATE utf8_german2_ci NOT NULL,
-  `clientaddress` varchar(20) COLLATE utf8_german2_ci NOT NULL,
   `orderID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+--
+-- Daten für Tabelle `dispatcher`
+--
+
+INSERT INTO `dispatcher` (`dispatcherID`, `dispname`, `orderID`) VALUES
+(1, 'DHL', 1),
+(2, 'GLS', 2),
+(3, 'DHL', 3),
+(4, 'GLS', 4);
 
 -- --------------------------------------------------------
 
@@ -68,8 +77,7 @@ CREATE TABLE `dispatcher` (
 
 CREATE TABLE `dispatcherclient` (
   `dispatcherID_FK` int(11) NOT NULL,
-  `clientID_FK` int(11) NOT NULL,
-  `clientaddress` varchar(40) COLLATE utf8_german2_ci NOT NULL
+  `clientID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 -- --------------------------------------------------------
@@ -141,6 +149,16 @@ CREATE TABLE `ordertab` (
   `shippingteamID_FK` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
+--
+-- Daten für Tabelle `ordertab`
+--
+
+INSERT INTO `ordertab` (`orderID`, `total`, `date`, `clientID`, `shippingteamID_FK`) VALUES
+(1, 600, '2020-01-30', 1, 1),
+(2, 799, '2020-02-12', 2, 2),
+(3, 600, '2020-01-30', 3, 3),
+(4, 799, '2020-02-12', 4, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -165,7 +183,10 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`productID`, `status`, `amount`, `bulkprice`, `category`, `availabilty`, `singleprice`, `description`, `location`, `manuID`) VALUES
-(2, 1, 10, 9, 'Tea', 1, 1, 'Green Tea from China', 'Zone 1', 1);
+(1, 1, 8, 9, 'Tea', 1, 2, 'Green Tea from China', 'Zone 1', 1),
+(2, 0, 10, 20, 'Coffee', 0, 3, 'Best coffee ever!', 'Zone 2', 2),
+(3, 1, 8, 6, 'Soft Drinks', 1, 1, 'Sparkling Coke', 'Zone 3', 3),
+(4, 0, 100, 900, 'Special Drinks', 1, 10, 'Hempy Dempy Green Lemonade', 'Zone 4', 4);
 
 -- --------------------------------------------------------
 
@@ -369,13 +390,13 @@ ALTER TABLE `orderlist`
 -- AUTO_INCREMENT für Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `product`
 --
 ALTER TABLE `product`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `shippingteam`
