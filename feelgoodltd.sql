@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Jan 2020 um 13:15
+-- Erstellungszeit: 15. Jan 2020 um 14:33
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `client` (
   `clientID` int(11) NOT NULL,
   `clientname` varchar(30) COLLATE utf8_german2_ci NOT NULL,
-  `clientaddress` varchar(30) COLLATE utf8_german2_ci NOT NULL,
+  `clientaddress` varchar(60) COLLATE utf8_german2_ci NOT NULL,
   `clientemail` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `clientphone` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `shippingarea` varchar(10) COLLATE utf8_german2_ci NOT NULL
@@ -42,10 +42,22 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`clientID`, `clientname`, `clientaddress`, `clientemail`, `clientphone`, `shippingarea`) VALUES
-(1, 'Mister', 'Hemp', 'hemp@green.com', '+4366412349330', 'NORD'),
-(2, 'Super', 'Trooper', 'trooper@deathstar.com', '+43680596404', 'OST'),
-(3, 'Daniela', 'Tunichtgut', 'unfug@bledsinn.com', '+436763049404', 'SÜD'),
-(4, 'John', 'Wick', 'john@wick.com', '+436649787775', 'WEST');
+(1, 'Mister Hemp', 'Landstraße 72, 4020 Linz', 'hemp@green.com', '+4366412349330', 'NORD'),
+(2, 'Super Trooper', 'Weitwegweg 999, 9020 Klagenfurt', 'trooper@deathstar.com', '+43680596404', 'OST'),
+(3, 'Daniela Tunichtgut', 'Josefgasse 11, 7020 Loipersbach', 'unfug@bledsinn.com', '+436763049404', 'SÜD'),
+(4, 'John Wick', 'Brennendes Höllentor 666, 6020 Innsbruck', 'john@wick.com', '+436649787775', 'WEST'),
+(5, 'Matthias Riedl', 'Kettenbrückengasse 23, 1050 Wien', 'matthias.riedl@expleo.com', '+43664523449', 'NORD'),
+(6, 'Wolfgang Figl', 'Musterweg 34, 1040 Wien', 'wolfgang.figl@expleo.com', '+436761234098', 'OST'),
+(7, 'Markus Gehbauer', 'Keltengasse 4, 1230 Wien', 'mgehbauer@gmail.com', '+436992348906', 'SÜD'),
+(8, 'Marion Herms', 'Gertergasse 87, 8020 Graz', 'herms@gmail.com', '+4368012367593', 'WEST'),
+(9, 'Daniela Suchny', 'Reiterweg 4, 1080 Wien', 'danisuchny@gmail.com', '+436804356777', 'NORD'),
+(10, 'Peter Suchny', 'Reiterweg 4, 1080 Wien', 'petersuchny@gmail.com', '+436804829437', 'OST'),
+(11, 'Edmund Sackbauer', 'Hasengasse 38, 1010 Wien', 'mundl@gmail.com', '+4367687345690', 'SÜD'),
+(12, 'Otto Bauer', 'Josef-Messner-Straße 12, 5020 Salzburg', 'ottob@gmx.at', '+43664130303', 'WEST'),
+(13, 'Hermine Granger', 'Muggelweg 45, 4020 Linz', 'hermineg@wizzard.wz', '+436993567544', 'NORD'),
+(14, 'Dobby Elf', 'Winkelgasse 1, 6850', 'dobbyelf@gmail.com', '+436808887754', 'OST'),
+(15, 'Martina Haselnuss', 'Nussgasse 42, 3390 Melk', 'nusserl@spongebob.com', '+4366022233444', 'SÜD'),
+(16, 'Sigmund Ferdanz', 'Stummergasse 6, 1220 Wien', 'sigi@hotmail.com', '+43664122233', 'WEST');
 
 -- --------------------------------------------------------
 
@@ -199,6 +211,7 @@ INSERT INTO `ordertab` (`orderID`, `total`, `date`, `clientID`, `shippingteamID_
 
 CREATE TABLE `product` (
   `productID` int(11) NOT NULL,
+  `productname` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `status` tinyint(1) NOT NULL,
   `amount` int(11) NOT NULL,
   `bulkprice` int(11) NOT NULL,
@@ -214,11 +227,11 @@ CREATE TABLE `product` (
 -- Daten für Tabelle `product`
 --
 
-INSERT INTO `product` (`productID`, `status`, `amount`, `bulkprice`, `category`, `availabilty`, `singleprice`, `description`, `location`, `manuID`) VALUES
-(1, 1, 8, 9, 'Tea', 1, 2, 'Green Tea from China', 'Zone 1', 1),
-(2, 0, 10, 20, 'Coffee', 0, 3, 'Best coffee ever!', 'Zone 2', 2),
-(3, 1, 8, 6, 'Soft Drinks', 1, 1, 'Sparkling Coke', 'Zone 3', 3),
-(4, 0, 100, 900, 'Special Drinks', 1, 10, 'Hempy Dempy Green Lemonade', 'Zone 4', 4);
+INSERT INTO `product` (`productID`, `productname`, `status`, `amount`, `bulkprice`, `category`, `availabilty`, `singleprice`, `description`, `location`, `manuID`) VALUES
+(1, 'Mega Tee', 1, 8, 9, 'Tea', 1, 2, 'Green Tea from China', 'Zone 1', 1),
+(2, 'Super Duper Kaffee', 0, 10, 20, 'Coffee', 0, 3, 'Best coffee ever!', 'Zone 2', 2),
+(3, 'Coke Zero', 1, 8, 6, 'Soft Drinks', 1, 1, 'Sparkling Coke', 'Zone 3', 3),
+(4, 'Red Bull', 0, 100, 900, 'Energy Drinks', 1, 10, 'Fliiiieg Baby', 'Zone 4', 4);
 
 -- --------------------------------------------------------
 
@@ -410,7 +423,7 @@ ALTER TABLE `staffmember`
 -- AUTO_INCREMENT für Tabelle `client`
 --
 ALTER TABLE `client`
-  MODIFY `clientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `clientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT für Tabelle `dispatcher`
