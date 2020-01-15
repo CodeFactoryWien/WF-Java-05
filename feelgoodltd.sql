@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 14. Jan 2020 um 15:43
+-- Erstellungszeit: 15. Jan 2020 um 09:43
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -68,8 +68,18 @@ CREATE TABLE `dispatcher` (
 
 CREATE TABLE `manufacturer` (
   `manuID` int(11) NOT NULL,
-  `manuname` int(11) NOT NULL
+  `manuname` varchar(20) COLLATE utf8_german2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+--
+-- Daten für Tabelle `manufacturer`
+--
+
+INSERT INTO `manufacturer` (`manuID`, `manuname`) VALUES
+(1, 'Sonnentor'),
+(2, 'Relax Drinks'),
+(3, 'Natural'),
+(4, 'Muraurer');
 
 -- --------------------------------------------------------
 
@@ -104,6 +114,13 @@ CREATE TABLE `product` (
   `manuID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
+--
+-- Daten für Tabelle `product`
+--
+
+INSERT INTO `product` (`productID`, `status`, `amount`, `bulkprice`, `category`, `availabilty`, `singleprice`, `description`, `location`, `manuID`) VALUES
+(2, 1, 10, 9, 'Tea', 1, 1, 'Green Tea from China', 'Zone 1', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -127,6 +144,16 @@ CREATE TABLE `shippingteam` (
   `shippingarea` varchar(10) COLLATE utf8_german2_ci NOT NULL,
   `staffID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+--
+-- Daten für Tabelle `shippingteam`
+--
+
+INSERT INTO `shippingteam` (`shippingteamID`, `teamname`, `shippingarea`, `staffID`) VALUES
+(1, 'A', 'NORD', 1),
+(2, 'B', 'OST', 2),
+(3, 'C', 'SÜD', 3),
+(4, 'D', 'WEST', 4);
 
 -- --------------------------------------------------------
 
@@ -154,6 +181,16 @@ CREATE TABLE `staffmember` (
   `staffsvnumber` int(11) NOT NULL,
   `role` varchar(30) COLLATE utf8_german2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
+
+--
+-- Daten für Tabelle `staffmember`
+--
+
+INSERT INTO `staffmember` (`staffID`, `staffname`, `staffphone`, `staffemail`, `staffaddress`, `staffsvnumber`, `role`) VALUES
+(1, 'Test Dummie', '+01707504', 'ÍT@feeldgood.com', 'Poldergasse 5, 8020 Graz', 1234442342, 'IT'),
+(2, 'Max Mustermann', '+018493303', 'max@feeldgood.com', 'Musterplatz 45, 1100 Wien', 1876123456, 'Accounting'),
+(3, 'Mister Muster', '+019987665', 'Mister@feeldgood.com', 'Hohlplatz 34, 1200 Wien', 2147483647, 'Sales'),
+(4, 'Olaf Dodo', '+01845642', 'olaf@olaf.de', 'Musterplatz 122, 5040 Salzburg', 6723333, 'Sales');
 
 --
 -- Indizes der exportierten Tabellen
@@ -239,7 +276,7 @@ ALTER TABLE `dispatcher`
 -- AUTO_INCREMENT für Tabelle `manufacturer`
 --
 ALTER TABLE `manufacturer`
-  MODIFY `manuID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `manuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT für Tabelle `ordertab`
@@ -251,19 +288,19 @@ ALTER TABLE `ordertab`
 -- AUTO_INCREMENT für Tabelle `product`
 --
 ALTER TABLE `product`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT für Tabelle `shippingteam`
 --
 ALTER TABLE `shippingteam`
-  MODIFY `shippingteamID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `shippingteamID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT für Tabelle `staffmember`
 --
 ALTER TABLE `staffmember`
-  MODIFY `staffID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `staffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints der exportierten Tabellen
