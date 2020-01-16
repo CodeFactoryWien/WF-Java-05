@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 16. Jan 2020 um 14:05
+-- Erstellungszeit: 16. Jan 2020 um 14:30
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -191,7 +191,21 @@ CREATE TABLE `orderlist` (
 
 INSERT INTO `orderlist` (`orderlistID`, `orderID_FK`) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5),
+(6, 6),
+(7, 7),
+(8, 8),
+(9, 9),
+(10, 10),
+(11, 11),
+(12, 12),
+(13, 13),
+(14, 14),
+(15, 15),
+(16, 16);
 
 -- --------------------------------------------------------
 
@@ -241,7 +255,7 @@ CREATE TABLE `product` (
   `category` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `productname` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `description` varchar(200) COLLATE utf8_german2_ci NOT NULL,
-  `amount` int(11) NOT NULL,
+  `instock` int(11) NOT NULL,
   `singleprice` float NOT NULL,
   `bulkprice` float NOT NULL,
   `availabilty` tinyint(1) NOT NULL,
@@ -253,33 +267,33 @@ CREATE TABLE `product` (
 -- Daten für Tabelle `product`
 --
 
-INSERT INTO `product` (`productID`, `category`, `productname`, `description`, `amount`, `singleprice`, `bulkprice`, `availabilty`, `location`, `manuID`) VALUES
-(1, 'Tea', 'Green Tee', 'Original Green Tea from China.', 10, 1.29, 1.09, 1, 'Zone 1', 1),
-(2, 'Tea', 'Balck Tea', 'The taste is strong, bold, full-bodied flavor.', 10, 1.19, 0.99, 0, 'Zone 1', 1),
-(3, 'Tea', 'Chai Tea', 'Chai Tea is essentially black tea paired with warm spices.', 10, 1.49, 1.39, 1, 'Zone 1', 1),
-(4, 'Tea', 'Herbal Tea', 'It\'s made from dried herbs, fruits, and flowers, which can create a wide range of delicate flavors.', 10, 1.09, 0.97, 1, 'Zone 1', 1),
-(5, 'Tea', 'Matcha Tea', 'Matcha is made by grinding up green tea leaves into a powder.', 10, 1.59, 1.22, 0, 'Zone 1', 1),
-(6, 'Tea', 'Oolong Tea', 'Oolong, or wulong, tea is semi-oxidized and picked later in the season than green tea.', 10, 1.69, 1.29, 1, 'Zone 1', 1),
-(7, 'Coffee', 'Caffe Americano', 'An espresso drink where hot water is added to espresso creating a coffee similar in strength but different in taste to regular drip coffee.', 5, 3.99, 3.5, 1, 'Zone 2', 2),
-(8, 'Coffee', 'Cafe au lait', 'Strong coffee made with scalded milk in a 1:1 ratio.', 12, 2.99, 2.49, 0, 'Zone 2', 2),
-(9, 'Coffee', 'Cappuccino', 'Espresso made with hot milk and steamed milk foam.', 10, 2.79, 2.59, 1, 'Zone 2', 2),
-(10, 'Coffee', 'Flat White', 'An espresso made similar to a latte only with textured milk.', 10, 1.99, 1.49, 1, 'Zone 2', 2),
-(11, 'Coffee', 'Espressino', 'A drink made from espresso, steamed milk and cocoa powder.', 10, 4.29, 3.89, 1, 'Zone 2', 2),
-(12, 'Coffee', 'Macchiato', 'An espresso made with a small amount of foamed milk, similar to a cappuccino only stronger.', 10, 2.19, 1.79, 0, 'Zone 2', 2),
-(13, 'Coffee', 'Vienna Coffee', 'Coffee or espresso made with whipped cream with milk added on some occasions.', 6, 5.79, 5.59, 1, 'Zone 2', 2),
-(14, 'Soft Drinks', 'Almdudler', 'Lemonade fresh from the alpes.', 6, 1.09, 0.99, 1, 'Zone 3', 3),
-(15, 'Soft Drinks', 'Fanta Orange', 'Sparkling leomande with orange flavour.', 20, 0.99, 0.79, 1, 'Zone 3', 3),
-(16, 'Soft Drinks', 'Fanta Lemon', 'Sparkling leomande with lemon flavour.', 20, 0.99, 0.79, 1, 'Zone 3', 3),
-(17, 'Soft Drinks', 'Fanta Mango', 'Sparkling leomande with mango flavour.', 20, 0.99, 0.79, 1, 'Zone 3', 3),
-(18, 'Soft Drinks', 'Fanta Grapefruit', 'Sparkling leomande with grapefruit flavour.', 20, 0.99, 0.79, 1, 'Zone 3', 3),
-(19, 'Soft Drinks', 'Sprite', 'Kill your thurst with sparkling limes.', 6, 0.89, 0.76, 0, 'Zone 3', 3),
-(20, 'Energy Drinks', 'Red Bull', 'A mix of sugar, synthetic caffeine, taurine and several B vitamins, all of which are well-known for their energy-promoting qualities.', 6, 1.49, 1.29, 1, 'Zone 4', 4),
-(21, 'Energy Drinks', 'Red Bull Sugarfree', 'A mix of sugar alternatives, synthetic caffeine, taurine and several B vitamins, all of which are well-known for their energy-promoting qualities.', 6, 1.49, 1.29, 1, 'Zone 4', 4),
-(22, 'Energy Drinks', 'Monster Energy Green', 'Monster Energy drinks are a tool of the devil.', 6, 1.59, 1.39, 1, 'Zone 4', 4),
-(23, 'Energy Drinks', 'Monster Juiced', 'Contains 16% fruit juice along with Monster Energy\'s standard energy blend.', 6, 1.49, 1.29, 1, 'Zone 4', 4),
-(24, 'Energy Drinks', 'Flying Horse', 'If you wanna fly like a horse, drink 6 of a kind!', 6, 1.19, 1.09, 1, 'Zone 4', 4),
+INSERT INTO `product` (`productID`, `category`, `productname`, `description`, `instock`, `singleprice`, `bulkprice`, `availabilty`, `location`, `manuID`) VALUES
+(1, 'Tea', 'Green Tee', 'Original Green Tea from China.', 900, 1.29, 1.09, 1, 'Zone 1', 1),
+(2, 'Tea', 'Balck Tea', 'The taste is strong, bold, full-bodied flavor.', 0, 1.19, 0.99, 0, 'Zone 1', 1),
+(3, 'Tea', 'Chai Tea', 'Chai Tea is essentially black tea paired with warm spices.', 1000, 1.49, 1.39, 1, 'Zone 1', 1),
+(4, 'Tea', 'Herbal Tea', 'It\'s made from dried herbs, fruits, and flowers, which can create a wide range of delicate flavors.', 1000, 1.09, 0.97, 1, 'Zone 1', 1),
+(5, 'Tea', 'Matcha Tea', 'Matcha is made by grinding up green tea leaves into a powder.', 0, 1.59, 1.22, 0, 'Zone 1', 1),
+(6, 'Tea', 'Oolong Tea', 'Oolong, or wulong, tea is semi-oxidized and picked later in the season than green tea.', 1200, 1.69, 1.29, 1, 'Zone 1', 1),
+(7, 'Coffee', 'Caffe Americano', 'An espresso drink where hot water is added to espresso creating a coffee similar in strength but different in taste to regular drip coffee.', 500, 3.99, 3.5, 1, 'Zone 2', 2),
+(8, 'Coffee', 'Cafe au lait', 'Strong coffee made with scalded milk in a 1:1 ratio.', 0, 2.99, 2.49, 0, 'Zone 2', 2),
+(9, 'Coffee', 'Cappuccino', 'Espresso made with hot milk and steamed milk foam.', 340, 2.79, 2.59, 1, 'Zone 2', 2),
+(10, 'Coffee', 'Flat White', 'An espresso made similar to a latte only with textured milk.', 785, 1.99, 1.49, 1, 'Zone 2', 2),
+(11, 'Coffee', 'Espressino', 'A drink made from espresso, steamed milk and cocoa powder.', 1090, 4.29, 3.89, 1, 'Zone 2', 2),
+(12, 'Coffee', 'Macchiato', 'An espresso made with a small amount of foamed milk, similar to a cappuccino only stronger.', 0, 2.19, 1.79, 0, 'Zone 2', 2),
+(13, 'Coffee', 'Vienna Coffee', 'Coffee or espresso made with whipped cream with milk added on some occasions.', 646, 5.79, 5.59, 1, 'Zone 2', 2),
+(14, 'Soft Drinks', 'Almdudler', 'Lemonade fresh from the alpes.', 282, 1.09, 0.99, 1, 'Zone 3', 3),
+(15, 'Soft Drinks', 'Fanta Orange', 'Sparkling leomande with orange flavour.', 2000, 0.99, 0.79, 1, 'Zone 3', 3),
+(16, 'Soft Drinks', 'Fanta Lemon', 'Sparkling leomande with lemon flavour.', 1845, 0.99, 0.79, 1, 'Zone 3', 3),
+(17, 'Soft Drinks', 'Fanta Mango', 'Sparkling leomande with mango flavour.', 209, 0.99, 0.79, 1, 'Zone 3', 3),
+(18, 'Soft Drinks', 'Fanta Grapefruit', 'Sparkling leomande with grapefruit flavour.', 368, 0.99, 0.79, 1, 'Zone 3', 3),
+(19, 'Soft Drinks', 'Sprite', 'Kill your thurst with sparkling limes.', 0, 0.89, 0.76, 0, 'Zone 3', 3),
+(20, 'Energy Drinks', 'Red Bull', 'A mix of sugar, synthetic caffeine, taurine and several B vitamins, all of which are well-known for their energy-promoting qualities.', 630, 1.49, 1.29, 1, 'Zone 4', 4),
+(21, 'Energy Drinks', 'Red Bull Sugarfree', 'A mix of sugar alternatives, synthetic caffeine, taurine and several B vitamins, all of which are well-known for their energy-promoting qualities.', 467, 1.49, 1.29, 1, 'Zone 4', 4),
+(22, 'Energy Drinks', 'Monster Energy Green', 'Monster Energy drinks are a tool of the devil.', 776, 1.59, 1.39, 1, 'Zone 4', 4),
+(23, 'Energy Drinks', 'Monster Juiced', 'Contains 16% fruit juice along with Monster Energy\'s standard energy blend.', 29, 1.49, 1.29, 1, 'Zone 4', 4),
+(24, 'Energy Drinks', 'Flying Horse', 'If you wanna fly like a horse, drink 6 of a kind!', 66, 1.19, 1.09, 1, 'Zone 4', 4),
 (25, 'Energy Drinks', 'Blaue Sau', 'The famous Blaue Sau drink is back! Get blue thungs with a blue pig!', 24, 0.99, 0.89, 1, 'Zone 4', 4),
-(26, 'Energy Drinks', 'The Holy CF', 'Legendary drink from the Code Factory.', 24, 99.99, 99.98, 0, 'Zone 4', 4);
+(26, 'Energy Drinks', 'The Holy CF', 'Legendary drink from the Code Factory.', 0, 99.99, 99.98, 0, 'Zone 4', 4);
 
 -- --------------------------------------------------------
 
@@ -530,7 +544,7 @@ ALTER TABLE `orderamount`
 -- AUTO_INCREMENT für Tabelle `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT für Tabelle `ordertab`
