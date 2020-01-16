@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 16. Jan 2020 um 14:30
+-- Erstellungszeit: 16. Jan 2020 um 14:59
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -131,7 +131,21 @@ CREATE TABLE `dispatcherorder` (
 
 INSERT INTO `dispatcherorder` (`dispatcherID_FK`, `orderID_FK`) VALUES
 (1, 1),
-(2, 2);
+(1, 5),
+(1, 9),
+(1, 13),
+(2, 2),
+(2, 6),
+(2, 10),
+(2, 14),
+(3, 3),
+(3, 7),
+(3, 11),
+(3, 15),
+(4, 4),
+(4, 8),
+(4, 12),
+(4, 16);
 
 -- --------------------------------------------------------
 
