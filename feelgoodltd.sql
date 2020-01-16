@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 15. Jan 2020 um 15:10
+-- Erstellungszeit: 16. Jan 2020 um 14:05
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `felldgoodltd`
+-- Datenbank: `feelgoodltd`
 --
 
 -- --------------------------------------------------------
@@ -149,10 +149,10 @@ CREATE TABLE `manufacturer` (
 --
 
 INSERT INTO `manufacturer` (`manuID`, `manuname`) VALUES
-(1, 'Sonnentor'),
-(2, 'Relax Drinks'),
-(3, 'Natural'),
-(4, 'Muraurer');
+(1, 'Happy Tea GmbH'),
+(2, 'Strong Coffeine Ltd.'),
+(3, 'Sugarland KG'),
+(4, 'Speedy Ltd.');
 
 -- --------------------------------------------------------
 
@@ -201,7 +201,8 @@ INSERT INTO `orderlist` (`orderlistID`, `orderID_FK`) VALUES
 
 CREATE TABLE `ordertab` (
   `orderID` int(11) NOT NULL,
-  `total` int(11) NOT NULL,
+  `status` int(1) NOT NULL,
+  `total` float NOT NULL,
   `date` date NOT NULL,
   `clientID` int(11) NOT NULL,
   `shippingteamID_FK` int(11) NOT NULL
@@ -211,15 +212,23 @@ CREATE TABLE `ordertab` (
 -- Daten für Tabelle `ordertab`
 --
 
-INSERT INTO `ordertab` (`orderID`, `total`, `date`, `clientID`, `shippingteamID_FK`) VALUES
-(1, 600, '2020-01-30', 1, 1),
-(2, 800, '2020-02-12', 2, 2),
-(3, 600, '2020-01-30', 3, 3),
-(4, 100, '2020-02-12', 4, 4),
-(5, 1100, '2019-12-18', 5, 1),
-(6, 120, '2019-12-04', 6, 2),
-(7, 450, '2020-01-06', 7, 3),
-(8, 90, '2020-01-03', 8, 4);
+INSERT INTO `ordertab` (`orderID`, `status`, `total`, `date`, `clientID`, `shippingteamID_FK`) VALUES
+(1, 0, 679.99, '2020-01-30', 1, 1),
+(2, 0, 799.99, '2020-02-12', 2, 2),
+(3, 1, 599.99, '2020-01-30', 3, 3),
+(4, 0, 99.79, '2020-02-12', 4, 4),
+(5, 0, 1129.89, '2019-12-18', 5, 1),
+(6, 1, 120.99, '2019-12-04', 6, 2),
+(7, 2, 458.99, '2020-01-06', 7, 3),
+(8, 1, 89.99, '2020-01-03', 8, 4),
+(9, 2, 129.79, '2019-12-19', 9, 1),
+(10, 0, 344.89, '2019-12-02', 10, 2),
+(11, 2, 4499.99, '2020-01-05', 11, 3),
+(12, 2, 19.99, '2020-01-03', 12, 4),
+(13, 1, 999.99, '2019-12-12', 13, 1),
+(14, 1, 333.89, '2019-12-09', 14, 2),
+(15, 2, 639.89, '2020-01-21', 15, 3),
+(16, 1, 70.89, '2020-01-09', 16, 4);
 
 -- --------------------------------------------------------
 
@@ -229,14 +238,13 @@ INSERT INTO `ordertab` (`orderID`, `total`, `date`, `clientID`, `shippingteamID_
 
 CREATE TABLE `product` (
   `productID` int(11) NOT NULL,
-  `productname` varchar(30) COLLATE utf8_german2_ci NOT NULL,
-  `status` tinyint(1) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `bulkprice` int(11) NOT NULL,
   `category` varchar(30) COLLATE utf8_german2_ci NOT NULL,
+  `productname` varchar(30) COLLATE utf8_german2_ci NOT NULL,
+  `description` varchar(200) COLLATE utf8_german2_ci NOT NULL,
+  `amount` int(11) NOT NULL,
+  `singleprice` float NOT NULL,
+  `bulkprice` float NOT NULL,
   `availabilty` tinyint(1) NOT NULL,
-  `singleprice` int(11) NOT NULL,
-  `description` varchar(100) COLLATE utf8_german2_ci NOT NULL,
   `location` varchar(20) COLLATE utf8_german2_ci NOT NULL,
   `manuID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
@@ -245,11 +253,33 @@ CREATE TABLE `product` (
 -- Daten für Tabelle `product`
 --
 
-INSERT INTO `product` (`productID`, `productname`, `status`, `amount`, `bulkprice`, `category`, `availabilty`, `singleprice`, `description`, `location`, `manuID`) VALUES
-(1, 'Mega Tee', 1, 8, 9, 'Tea', 1, 2, 'Green Tea from China', 'Zone 1', 1),
-(2, 'Super Duper Kaffee', 0, 10, 20, 'Coffee', 0, 3, 'Best coffee ever!', 'Zone 2', 2),
-(3, 'Coke Zero', 1, 8, 6, 'Soft Drinks', 1, 1, 'Sparkling Coke', 'Zone 3', 3),
-(4, 'Red Bull', 0, 100, 900, 'Energy Drinks', 1, 10, 'Fliiiieg Baby', 'Zone 4', 4);
+INSERT INTO `product` (`productID`, `category`, `productname`, `description`, `amount`, `singleprice`, `bulkprice`, `availabilty`, `location`, `manuID`) VALUES
+(1, 'Tea', 'Green Tee', 'Original Green Tea from China.', 10, 1.29, 1.09, 1, 'Zone 1', 1),
+(2, 'Tea', 'Balck Tea', 'The taste is strong, bold, full-bodied flavor.', 10, 1.19, 0.99, 0, 'Zone 1', 1),
+(3, 'Tea', 'Chai Tea', 'Chai Tea is essentially black tea paired with warm spices.', 10, 1.49, 1.39, 1, 'Zone 1', 1),
+(4, 'Tea', 'Herbal Tea', 'It\'s made from dried herbs, fruits, and flowers, which can create a wide range of delicate flavors.', 10, 1.09, 0.97, 1, 'Zone 1', 1),
+(5, 'Tea', 'Matcha Tea', 'Matcha is made by grinding up green tea leaves into a powder.', 10, 1.59, 1.22, 0, 'Zone 1', 1),
+(6, 'Tea', 'Oolong Tea', 'Oolong, or wulong, tea is semi-oxidized and picked later in the season than green tea.', 10, 1.69, 1.29, 1, 'Zone 1', 1),
+(7, 'Coffee', 'Caffe Americano', 'An espresso drink where hot water is added to espresso creating a coffee similar in strength but different in taste to regular drip coffee.', 5, 3.99, 3.5, 1, 'Zone 2', 2),
+(8, 'Coffee', 'Cafe au lait', 'Strong coffee made with scalded milk in a 1:1 ratio.', 12, 2.99, 2.49, 0, 'Zone 2', 2),
+(9, 'Coffee', 'Cappuccino', 'Espresso made with hot milk and steamed milk foam.', 10, 2.79, 2.59, 1, 'Zone 2', 2),
+(10, 'Coffee', 'Flat White', 'An espresso made similar to a latte only with textured milk.', 10, 1.99, 1.49, 1, 'Zone 2', 2),
+(11, 'Coffee', 'Espressino', 'A drink made from espresso, steamed milk and cocoa powder.', 10, 4.29, 3.89, 1, 'Zone 2', 2),
+(12, 'Coffee', 'Macchiato', 'An espresso made with a small amount of foamed milk, similar to a cappuccino only stronger.', 10, 2.19, 1.79, 0, 'Zone 2', 2),
+(13, 'Coffee', 'Vienna Coffee', 'Coffee or espresso made with whipped cream with milk added on some occasions.', 6, 5.79, 5.59, 1, 'Zone 2', 2),
+(14, 'Soft Drinks', 'Almdudler', 'Lemonade fresh from the alpes.', 6, 1.09, 0.99, 1, 'Zone 3', 3),
+(15, 'Soft Drinks', 'Fanta Orange', 'Sparkling leomande with orange flavour.', 20, 0.99, 0.79, 1, 'Zone 3', 3),
+(16, 'Soft Drinks', 'Fanta Lemon', 'Sparkling leomande with lemon flavour.', 20, 0.99, 0.79, 1, 'Zone 3', 3),
+(17, 'Soft Drinks', 'Fanta Mango', 'Sparkling leomande with mango flavour.', 20, 0.99, 0.79, 1, 'Zone 3', 3),
+(18, 'Soft Drinks', 'Fanta Grapefruit', 'Sparkling leomande with grapefruit flavour.', 20, 0.99, 0.79, 1, 'Zone 3', 3),
+(19, 'Soft Drinks', 'Sprite', 'Kill your thurst with sparkling limes.', 6, 0.89, 0.76, 0, 'Zone 3', 3),
+(20, 'Energy Drinks', 'Red Bull', 'A mix of sugar, synthetic caffeine, taurine and several B vitamins, all of which are well-known for their energy-promoting qualities.', 6, 1.49, 1.29, 1, 'Zone 4', 4),
+(21, 'Energy Drinks', 'Red Bull Sugarfree', 'A mix of sugar alternatives, synthetic caffeine, taurine and several B vitamins, all of which are well-known for their energy-promoting qualities.', 6, 1.49, 1.29, 1, 'Zone 4', 4),
+(22, 'Energy Drinks', 'Monster Energy Green', 'Monster Energy drinks are a tool of the devil.', 6, 1.59, 1.39, 1, 'Zone 4', 4),
+(23, 'Energy Drinks', 'Monster Juiced', 'Contains 16% fruit juice along with Monster Energy\'s standard energy blend.', 6, 1.49, 1.29, 1, 'Zone 4', 4),
+(24, 'Energy Drinks', 'Flying Horse', 'If you wanna fly like a horse, drink 6 of a kind!', 6, 1.19, 1.09, 1, 'Zone 4', 4),
+(25, 'Energy Drinks', 'Blaue Sau', 'The famous Blaue Sau drink is back! Get blue thungs with a blue pig!', 24, 0.99, 0.89, 1, 'Zone 4', 4),
+(26, 'Energy Drinks', 'The Holy CF', 'Legendary drink from the Code Factory.', 24, 99.99, 99.98, 0, 'Zone 4', 4);
 
 -- --------------------------------------------------------
 
@@ -311,7 +341,30 @@ CREATE TABLE `shippinteamproduct` (
 
 INSERT INTO `shippinteamproduct` (`shippingteamID_FK`, `productID_FK`) VALUES
 (1, 1),
-(2, 2);
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(2, 8),
+(2, 9),
+(2, 10),
+(2, 11),
+(2, 12),
+(2, 13),
+(3, 14),
+(3, 15),
+(3, 16),
+(3, 17),
+(3, 18),
+(3, 19),
+(4, 20),
+(4, 21),
+(4, 22),
+(4, 23),
+(4, 24),
+(4, 25),
+(4, 26);
 
 -- --------------------------------------------------------
 
@@ -336,9 +389,21 @@ CREATE TABLE `staffmember` (
 
 INSERT INTO `staffmember` (`staffID`, `staffname`, `staffphone`, `staffemail`, `staffaddress`, `staffsvnumber`, `role`, `shippingteamID`) VALUES
 (1, 'Test Dummie', '+01707504', 'ÍT@feeldgood.com', 'Poldergasse 5, 8020 Graz', 1234442342, 'IT', 1),
-(2, 'Max Mustermann', '+018493303', 'max@feeldgood.com', 'Musterplatz 45, 1100 Wien', 1876123456, 'Accounting', 2),
-(3, 'Mister Muster', '+019987665', 'Mister@feeldgood.com', 'Hohlplatz 34, 1200 Wien', 2147483647, 'Sales', 3),
-(4, 'Olaf Dodo', '+01845642', 'olaf@olaf.de', 'Musterplatz 122, 5040 Salzburg', 6723333, 'Sales', 4);
+(2, 'Max Mustermann', '+018493303', 'max@feeldgood.com', 'Musterplatz 45, 1100 Wien', 1876123456, 'Accounting', 1),
+(3, 'Mister Muster', '+019987665', 'Mister@feeldgood.com', 'Hohlplatz 34, 1200 Wien', 2147483647, 'Sales', 4),
+(4, 'Olaf Dodo', '+01845642', 'olaf@olaf.de', 'Musterplatz 122, 5040 Salzburg', 1787762333, 'Warehouse Worker', 4),
+(6, 'Theodor Salter', '+01847733', 'salter.t@gmx.at', 'Grafenweg 56, 1220 Wien', 1870762432, 'IT', 2),
+(7, 'Gerda Rogers', '+43664222939', 'gerdarogers@gmail.com', 'Hubergasse 34, 1090 Wien', 1682442812, 'IT', 3),
+(8, 'Thomas Muster', '+01847223', 'mustertype@ffg.de', 'Musterplatz 12, 1100 Wien', 1666123216, 'Accounting', 3),
+(9, 'Zazu Sembawae', '+43680234332', 'zztop@rock.com', 'Huttengasse 2, 1160 Wien', 267248377, 'Sales', 3),
+(10, 'Johannes Huemer', '+436806687320', 'jhuemer@hotmail.com', 'Pilgramgasse 4, 1050 Wien', 1627762444, 'Warehouse Worker', 3),
+(11, 'Bernd Wilaf', '+436763453838', 'pwilaf@dbz.jp', 'Drachenballweg 111, 1210 Wien', 1007762556, 'Warehouse Worker', 1),
+(12, 'Georg Fernos', '+436643334432', 'ffr@hotmail.com', 'Kirchengasse 67, 1070 Wien', 1827262888, 'Warehouse Worker', 2),
+(13, 'Maxwell Fork', '+43664775433', 'fork@gmx.at', 'Zummergasse 9, 1220 Wien', 1822762467, 'IT', 4),
+(14, 'Gerlinde Swoboda', '+018477442', 'swobi@feeldgood.com', 'Musterplatz 89, 1020 Wien', 1999123444, 'Accounting', 4),
+(15, 'Tom Remus', '+01847999', 'tomremus@gmx.de', 'Maiweg 66, 5020 Salzburg', 1777123222, 'Accounting', 2),
+(16, 'Olivia Jones', '+019987211', 'jones@feeldgood.com', 'Burggasse 9, 1070 Wien', 1147488823, 'Sales', 1),
+(17, 'Werner Kern', '+43680237788', 'werner@gmail.com', 'Hütteldorferstraße 5, 1150 Wie', 1111344445, 'Sales', 2);
 
 --
 -- Indizes der exportierten Tabellen
@@ -459,7 +524,7 @@ ALTER TABLE `manufacturer`
 -- AUTO_INCREMENT für Tabelle `orderamount`
 --
 ALTER TABLE `orderamount`
-  MODIFY `amountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `amountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT für Tabelle `orderlist`
@@ -471,13 +536,13 @@ ALTER TABLE `orderlist`
 -- AUTO_INCREMENT für Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT für Tabelle `product`
 --
 ALTER TABLE `product`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT für Tabelle `shippingteam`
@@ -489,7 +554,7 @@ ALTER TABLE `shippingteam`
 -- AUTO_INCREMENT für Tabelle `staffmember`
 --
 ALTER TABLE `staffmember`
-  MODIFY `staffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `staffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints der exportierten Tabellen
