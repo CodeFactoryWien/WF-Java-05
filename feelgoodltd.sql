@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 16. Jan 2020 um 14:59
+-- Erstellungszeit: 17. Jan 2020 um 13:30
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -171,26 +171,6 @@ INSERT INTO `manufacturer` (`manuID`, `manuname`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `orderamount`
---
-
-CREATE TABLE `orderamount` (
-  `amountID` int(11) NOT NULL,
-  `amount` int(11) NOT NULL,
-  `orderlistID_FK` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
-
---
--- Daten für Tabelle `orderamount`
---
-
-INSERT INTO `orderamount` (`amountID`, `amount`, `orderlistID_FK`) VALUES
-(1, 10, 1),
-(2, 5, 2);
-
--- --------------------------------------------------------
-
---
 -- Tabellenstruktur für Tabelle `orderlist`
 --
 
@@ -282,14 +262,14 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`productID`, `category`, `productname`, `description`, `instock`, `singleprice`, `bulkprice`, `availabilty`, `location`, `manuID`) VALUES
+(0, 'Coffee', 'Caffe Wakka Wakka', 'Get loco with the real wakka wakka taste!', 89, 8.99, 8.39, 1, 'Zone 2', 2),
 (1, 'Tea', 'Green Tee', 'Original Green Tea from China.', 900, 1.29, 1.09, 1, 'Zone 1', 1),
 (2, 'Tea', 'Balck Tea', 'The taste is strong, bold, full-bodied flavor.', 0, 1.19, 0.99, 0, 'Zone 1', 1),
 (3, 'Tea', 'Chai Tea', 'Chai Tea is essentially black tea paired with warm spices.', 1000, 1.49, 1.39, 1, 'Zone 1', 1),
 (4, 'Tea', 'Herbal Tea', 'It\'s made from dried herbs, fruits, and flowers, which can create a wide range of delicate flavors.', 1000, 1.09, 0.97, 1, 'Zone 1', 1),
-(5, 'Tea', 'Matcha Tea', 'Matcha is made by grinding up green tea leaves into a powder.', 0, 1.59, 1.22, 0, 'Zone 1', 1),
+(5, 'Tea', 'Matcha Tea', 'Matcha is made by grinding up green tea leaves into a powder.', 57, 1.59, 1.22, 1, 'Zone 1', 1),
 (6, 'Tea', 'Oolong Tea', 'Oolong, or wulong, tea is semi-oxidized and picked later in the season than green tea.', 1200, 1.69, 1.29, 1, 'Zone 1', 1),
-(7, 'Coffee', 'Caffe Americano', 'An espresso drink where hot water is added to espresso creating a coffee similar in strength but different in taste to regular drip coffee.', 500, 3.99, 3.5, 1, 'Zone 2', 2),
-(8, 'Coffee', 'Cafe au lait', 'Strong coffee made with scalded milk in a 1:1 ratio.', 0, 2.99, 2.49, 0, 'Zone 2', 2),
+(8, 'Coffee', 'Cafe au lait', 'Strong coffee made with scalded milk in a 1:1 ratio.', 679, 2.99, 2.49, 1, 'Zone 2', 2),
 (9, 'Coffee', 'Cappuccino', 'Espresso made with hot milk and steamed milk foam.', 340, 2.79, 2.59, 1, 'Zone 2', 2),
 (10, 'Coffee', 'Flat White', 'An espresso made similar to a latte only with textured milk.', 785, 1.99, 1.49, 1, 'Zone 2', 2),
 (11, 'Coffee', 'Espressino', 'A drink made from espresso, steamed milk and cocoa powder.', 1090, 4.29, 3.89, 1, 'Zone 2', 2),
@@ -307,7 +287,18 @@ INSERT INTO `product` (`productID`, `category`, `productname`, `description`, `i
 (23, 'Energy Drinks', 'Monster Juiced', 'Contains 16% fruit juice along with Monster Energy\'s standard energy blend.', 29, 1.49, 1.29, 1, 'Zone 4', 4),
 (24, 'Energy Drinks', 'Flying Horse', 'If you wanna fly like a horse, drink 6 of a kind!', 66, 1.19, 1.09, 1, 'Zone 4', 4),
 (25, 'Energy Drinks', 'Blaue Sau', 'The famous Blaue Sau drink is back! Get blue thungs with a blue pig!', 24, 0.99, 0.89, 1, 'Zone 4', 4),
-(26, 'Energy Drinks', 'The Holy CF', 'Legendary drink from the Code Factory.', 0, 99.99, 99.98, 0, 'Zone 4', 4);
+(26, 'Energy Drinks', 'The Holy CF', 'Legendary drink from the Code Factory.', 0, 99.99, 99.98, 0, 'Zone 4', 4),
+(27, 'Coffee', 'Steamed Black Coffee', 'Feel the taste of the Black Coffee!', 356, 2.69, 2.19, 1, 'Zone 2', 2),
+(28, 'Coffee', 'Milano', 'Coffee made with whipped cream with milk added on some occasions.', 796, 4.79, 4.49, 1, 'Zone 2', 2),
+(29, 'Energy Drinks', 'Hempy Energy', 'Get the natural energy kick from hemp!', 56, 1.49, 1.29, 1, 'Zone 4', 4),
+(30, 'Energy Drinks', 'Melon Insanity', 'Fruity melon explosion in your mouth!', 9, 1.79, 1.59, 1, 'Zone 4', 4),
+(31, 'Energy Drinks', 'Core Energizer', 'The name says all!', 6, 1.09, 0.99, 1, 'Zone 4', 4),
+(32, 'Tea', 'White Tea', 'Naturally sweet, delicate taste with a balance of floral and fruity undertones.', 190, 1.89, 1.69, 1, 'Zone 1', 1),
+(33, 'Tea', 'Mate Tea', 'Mate tea comes from the South American yerba plant, and the leaves are blanched, dried, aged, and cut into loose leaf tea.', 106, 1.49, 1.39, 1, 'Zone 1', 1),
+(34, 'Tea', 'Rooibos Tea', 'Naturally sweet, and can have warm, nutty, or vanilla tones.', 438, 1.39, 1.29, 1, 'Zone 1', 1),
+(35, 'Soft Drinks', 'Coca Cola', 'Coca-Cola, or Coke, is a carbonated soft drink manufactured by The Coca-Cola Company.', 2340, 0.89, 0.79, 1, 'Zone 3', 3),
+(36, 'Soft Drinks', 'Coca Cola Zero', 'All the great taste of Coca-Cola, without the calories. ', 2000, 0.89, 0.79, 1, 'Zone 3', 3),
+(37, 'Soft Drinks', 'Coca Cola Light', 'All the great taste of Coca-Cola, without the calories. ', 2090, 0.89, 0.79, 1, 'Zone 3', 3);
 
 -- --------------------------------------------------------
 
@@ -316,19 +307,39 @@ INSERT INTO `product` (`productID`, `category`, `productname`, `description`, `i
 --
 
 CREATE TABLE `productorderlist` (
+  `orderlistID_FK` int(11) NOT NULL,
   `productID_FK` int(11) NOT NULL,
-  `orderlistID_FK` int(11) NOT NULL
+  `amount` int(11) NOT NULL,
+  `subtotal` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 --
 -- Daten für Tabelle `productorderlist`
 --
 
-INSERT INTO `productorderlist` (`productID_FK`, `orderlistID_FK`) VALUES
-(1, 1),
-(2, 2),
-(1, 1),
-(2, 2);
+INSERT INTO `productorderlist` (`orderlistID_FK`, `productID_FK`, `amount`, `subtotal`) VALUES
+(5, 0, 10, 83.9),
+(1, 1, 5, 6.45),
+(2, 4, 67, 64.99),
+(4, 5, 500, 610),
+(4, 6, 760, 980.4),
+(5, 9, 10, 25.9),
+(2, 10, 123, 183.27),
+(5, 12, 10, 17.9),
+(1, 13, 10, 55.9),
+(2, 15, 10, 7.9),
+(1, 17, 35, 27.65),
+(2, 18, 78, 61.62),
+(3, 21, 10, 12.9),
+(2, 23, 9, 13.41),
+(3, 23, 5, 7.45),
+(2, 28, 20, 89.8),
+(3, 28, 54, 242.46),
+(6, 29, 300, 387),
+(1, 35, 4, 3.56),
+(3, 35, 100, 79),
+(3, 36, 100, 79),
+(3, 37, 100, 79);
 
 -- --------------------------------------------------------
 
@@ -471,13 +482,6 @@ ALTER TABLE `manufacturer`
   ADD PRIMARY KEY (`manuID`);
 
 --
--- Indizes für die Tabelle `orderamount`
---
-ALTER TABLE `orderamount`
-  ADD PRIMARY KEY (`amountID`),
-  ADD KEY `orderlistID_FK` (`orderlistID_FK`);
-
---
 -- Indizes für die Tabelle `orderlist`
 --
 ALTER TABLE `orderlist`
@@ -503,6 +507,7 @@ ALTER TABLE `product`
 -- Indizes für die Tabelle `productorderlist`
 --
 ALTER TABLE `productorderlist`
+  ADD UNIQUE KEY `productID_FK_2` (`productID_FK`,`orderlistID_FK`),
   ADD KEY `orderlistID_FK` (`orderlistID_FK`),
   ADD KEY `productID_FK` (`productID_FK`);
 
@@ -549,12 +554,6 @@ ALTER TABLE `manufacturer`
   MODIFY `manuID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT für Tabelle `orderamount`
---
-ALTER TABLE `orderamount`
-  MODIFY `amountID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT für Tabelle `orderlist`
 --
 ALTER TABLE `orderlist`
@@ -570,7 +569,7 @@ ALTER TABLE `ordertab`
 -- AUTO_INCREMENT für Tabelle `product`
 --
 ALTER TABLE `product`
-  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT für Tabelle `shippingteam`
@@ -607,12 +606,6 @@ ALTER TABLE `dispatcherclient`
 ALTER TABLE `dispatcherorder`
   ADD CONSTRAINT `dispatcherorder_ibfk_1` FOREIGN KEY (`dispatcherID_FK`) REFERENCES `dispatcher` (`dispatcherID`),
   ADD CONSTRAINT `dispatcherorder_ibfk_2` FOREIGN KEY (`orderID_FK`) REFERENCES `ordertab` (`orderID`);
-
---
--- Constraints der Tabelle `orderamount`
---
-ALTER TABLE `orderamount`
-  ADD CONSTRAINT `orderamount_ibfk_1` FOREIGN KEY (`orderlistID_FK`) REFERENCES `orderlist` (`orderlistID`);
 
 --
 -- Constraints der Tabelle `orderlist`
