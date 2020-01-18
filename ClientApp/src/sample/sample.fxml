@@ -15,7 +15,16 @@
          <children>
             <TabPane layoutX="25.0" layoutY="39.0" prefHeight="493.0" prefWidth="407.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
-                <Tab text="Coffee">
+                  <Tab text="All">
+                      <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <children>
+                                  <TableView fx:id="allproducts" layoutX="-3.0" onMouseClicked="#selectAllProductsTable" prefHeight="465.0" prefWidth="414.0" />
+                              </children>
+                          </AnchorPane>
+                      </content>
+                  </Tab>
+                  <Tab text="Coffee">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -50,7 +59,7 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Button layoutX="573.0" layoutY="513.0" mnemonicParsing="false" text="send order" />
+            <Button layoutX="573.0" layoutY="513.0" mnemonicParsing="false" onAction="#sendorder" text="send order" />
             <Button layoutX="572.0" layoutY="473.0" mnemonicParsing="false" onAction="#deletefromshoppingcart" text="delete item" />
             <Button layoutX="550.0" layoutY="435.0" mnemonicParsing="false" onAction="#updateamount" text="update amount" />
             <Button layoutX="495.0" layoutY="404.0" mnemonicParsing="false" onAction="#addtoshoppingcart" text="add item to shopping cart" />
@@ -71,8 +80,8 @@
             <TextField fx:id="productID" editable="false" layoutX="456.0" layoutY="198.0" />
             <Label layoutX="456.0" layoutY="181.0" text="No." />
             <Button layoutX="550.0" layoutY="96.0" mnemonicParsing="false" onAction="#userlogin" text="Login" />
-            <TableView fx:id="orderListTable" layoutX="1067.0" layoutY="31.0" prefHeight="291.0" prefWidth="511.0" />
-            <TableView fx:id="productorderList" layoutX="1067.0" layoutY="335.0" prefHeight="442.0" prefWidth="511.0" />
+            <TableView fx:id="orderListTable" layoutX="1067.0" layoutY="31.0" onMouseClicked="#selectitemorderlist" prefHeight="291.0" prefWidth="511.0" />
+            <TableView fx:id="productorderTable" layoutX="1067.0" layoutY="335.0" prefHeight="442.0" prefWidth="511.0" />
          </children>
       </AnchorPane>
    </children>
