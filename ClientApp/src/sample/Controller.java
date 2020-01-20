@@ -31,7 +31,8 @@ public class Controller {
   @FXML private TableView orderListTable;
   @FXML private TableView productorderTable;
 
-  @FXML private TextField clientID;
+  @FXML private TextField clientUsername;
+  @FXML private PasswordField clientPassword;
   @FXML private TextField productID;
   @FXML private TextField productnameText;
   @FXML private TextField singlepriceText;
@@ -426,49 +427,58 @@ public class Controller {
 
   public void userlogin() throws SQLException {
 
-      sum = BigDecimal.ZERO;
-    buffsum = BigDecimal.ZERO;
-    totalLabel.setText("Total: "+sum+"€");
-    orderList.clear();
-    orderListTable.setItems(orderList);
-    orderListTable.getColumns().clear();
-    productorderList.clear();
-    productorderTable.setItems(productorderList);
-    productorderTable.getColumns().clear();
-    shoppingcartList.clear();
-    shoppingcart.setItems(shoppingcartList);
-    shoppingcart.refresh();
-
-    Statement stmt = con.createStatement();
-    ResultSet rs =
-        stmt.executeQuery(
-            "SELECT orderID,status,total,date FROM ordertab WHERE clientID = "
-                + clientID.getText());
-    for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-      // We are using non property style for making dynamic table
-      final int j = i;
-      TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
-      col.setCellValueFactory(
-          new Callback<
-              TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
-            public ObservableValue<String> call(
-                TableColumn.CellDataFeatures<ObservableList, String> param) {
-              return new SimpleStringProperty(param.getValue().get(j).toString());
+    Statement stmt2 = con.createStatement();
+    if(stmt2.execute("SELECT username, password FROM client " +
+            "WHERE username LIKE('" +clientUsername.getText()+ "') AND " +
+            "password LIKE ('" +clientPassword.getText()+ "')")){
+        sum = BigDecimal.ZERO;
+        buffsum = BigDecimal.ZERO;
+        totalLabel.setText("Total: "+sum+"€");
+        orderList.clear();
+        orderListTable.setItems(orderList);
+        orderListTable.getColumns().clear();
+        productorderList.clear();
+        productorderTable.setItems(productorderList);
+        productorderTable.getColumns().clear();
+        shoppingcartList.clear();
+        shoppingcart.setItems(shoppingcartList);
+        shoppingcart.refresh();
+        Statement stmt = con.createStatement();
+        ResultSet rs =
+                stmt.executeQuery(
+                        "SELECT orderID,status,total,date " +
+                                "FROM ordertab " +
+                                "INNER JOIN client ON client.clientID = ordertab.clientID " +
+                                "WHERE username LIKE ('" + clientUsername.getText()+"')");
+        for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+            // We are using non property style for making dynamic table
+            final int j = i;
+            TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+            col.setCellValueFactory(
+                    new Callback<
+                            TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                        public ObservableValue<String> call(
+                                TableColumn.CellDataFeatures<ObservableList, String> param) {
+                            return new SimpleStringProperty(param.getValue().get(j).toString());
+                        }
+                    });
+            orderListTable.getColumns().addAll(col);
+        }
+        while (rs.next()) {
+            // Iterate Row
+            ObservableList<String> row = FXCollections.observableArrayList();
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                // Iterate Column
+                row.add(rs.getString(i));
             }
-          });
-      orderListTable.getColumns().addAll(col);
+            orderList.add(row);
+        }
+        orderListTable.setItems(orderList);
     }
-    while (rs.next()) {
-      // Iterate Row
-      ObservableList<String> row = FXCollections.observableArrayList();
-      for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-        // Iterate Column
-        row.add(rs.getString(i));
-      }
-      orderList.add(row);
     }
-    orderListTable.setItems(orderList);
-  }
+
+
+
 
   public void selectitemorderlist() throws SQLException {
 
@@ -533,6 +543,15 @@ public class Controller {
     while (rs.next()) {
       orderID_FK = Integer.parseInt(rs.getString("MAX(orderID)")) + 1;
     }
+      Statement stmt3 = con.createStatement();
+      ResultSet rs2 = stmt3.executeQuery("SELECT clientID FROM client " +
+              "WHERE username LIKE ('" + clientUsername.getText()
+              +"')");
+      String buffIDText ="";
+      while (rs2.next()){
+          buffIDText = rs2.getString("clientID");
+      }
+    rs = stmt.executeQuery("SELECT * FROM client WHERE ");
     stmt.execute(
         "INSERT INTO `ordertab`(`status`, `total`, `date`, `clientID`, `shippingteamID_FK`) "
             + "VALUES (0,"
@@ -540,14 +559,15 @@ public class Controller {
             + ",'"
             + dateString
             + "',"
-            + clientID.getText()
+            + buffIDText
             + ","
-            + "1)");
+            + "null)");
     stmt.execute("INSERT INTO `orderlist`(`orderID_FK`) VALUES (" + orderID_FK + ")");
     rs = stmt.executeQuery("SELECT COUNT(orderlistID) FROM orderlist");
     while (rs.next()) {
       orderlistID_FK = Integer.parseInt(rs.getString("COUNT(orderlistID)")) + 1;
     }
+    int buffID = 0;
     ObservableList buffList = shoppingcart.getItems();
     for (int i = 0; i < shoppingcart.getItems().size(); i++) {
       String buff = buffList.get(i).toString();
@@ -558,7 +578,7 @@ public class Controller {
       String[] buff5 = buff4[1].split(" total: ");
       String[] buff6 = buff5[1].split("€");
 
-      int buffID = Integer.parseInt(buff3[0]);
+      buffID = Integer.parseInt(buff3[0]);
       int buffAmount = Integer.parseInt(buff5[0]);
       BigDecimal buffTotalBigDecimal = new BigDecimal(buff6[0]);
       String buffTotal = buffTotalBigDecimal.toString();
@@ -578,10 +598,11 @@ public class Controller {
     orderList.clear();
     orderListTable.setItems(orderList);
     orderListTable.getColumns().clear();
+
     rs =
         stmt.executeQuery(
             "SELECT orderID,status,total,date FROM ordertab WHERE clientID = "
-                + clientID.getText());
+                + buffID);
     for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
       // We are using non property style for making dynamic table
       final int j = i;
@@ -595,7 +616,6 @@ public class Controller {
             }
           });
       orderListTable.getColumns().addAll(col);
-
     }
     while (rs.next()) {
       // Iterate Row
@@ -604,7 +624,6 @@ public class Controller {
         // Iterate Column
         row.add(rs.getString(i));
       }
-
       orderList.add(row);
     }
     orderListTable.setItems(orderList);
@@ -614,7 +633,6 @@ public class Controller {
       sum = BigDecimal.ZERO;
       buffsum = BigDecimal.ZERO;
   }
-
   public void searchProducts() throws SQLException {
         Statement stmt = con.createStatement();
         ObservableList allprodutsList = FXCollections.observableArrayList();

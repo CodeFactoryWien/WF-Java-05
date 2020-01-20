@@ -3,27 +3,25 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <AnchorPane id="a1" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: lightgrey;" stylesheets="@style.css">
+      <AnchorPane prefHeight="700.0" prefWidth="1600.0">
          <children>
-            <TabPane layoutX="25.0" layoutY="127.0" prefHeight="493.0" prefWidth="407.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="25.0" layoutY="127.0" prefHeight="433.0" prefWidth="407.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                   <Tab text="All">
                       <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                               <children>
-                                  <TableView fx:id="allproducts" layoutX="-3.0" onMouseClicked="#selectAllProductsTable" prefHeight="465.0" prefWidth="414.0" />
+                                  <TableView fx:id="allproducts" layoutX="-3.0" onMouseClicked="#selectAllProductsTable" prefHeight="463.0" prefWidth="414.0" />
                               </children>
                           </AnchorPane>
                       </content>
@@ -69,21 +67,10 @@
             <Button layoutX="495.0" layoutY="537.0" mnemonicParsing="false" onAction="#addtoshoppingcart" text="add item to shopping cart" />
             <TextField fx:id="amountText" layoutX="452.0" layoutY="501.0" prefHeight="25.0" prefWidth="64.0" />
             <Label layoutX="452.0" layoutY="484.0" text="Amount:" />
-            <Label fx:id="productDescLabel" layoutX="25.0" layoutY="657.0" prefHeight="137.0" prefWidth="407.0" wrapText="true" />
-            <Label fx:id="thema" layoutX="25.0" layoutY="14.0" text="Client ordering software">
-               <font>
-                  <Font name="Arial Bold" size="16.0" />
-               </font>
-               <textFill>
-                  <LinearGradient endX="1.0" endY="1.0">
-                     <stops>
-                        <Stop color="#05f77e" />
-                        <Stop color="#0fadd9" offset="1.0" />
-                     </stops>
-                  </LinearGradient>
-               </textFill></Label>
-            <TextField fx:id="clientID" layoutX="456.0" layoutY="56.0" />
-            <Label layoutX="456.0" layoutY="39.0" text="clientID:" />
+            <Label fx:id="productDescLabel" layoutX="25.0" layoutY="563.0" prefHeight="137.0" prefWidth="407.0" wrapText="true" />
+            <Label layoutX="25.0" layoutY="14.0" text="Client ordering software" />
+            <TextField fx:id="clientUsername" layoutX="456.0" layoutY="56.0" />
+            <Label layoutX="456.0" layoutY="39.0" text="Username:" />
             <TextField fx:id="productnameText" editable="false" layoutX="456.0" layoutY="373.0" />
             <Label layoutX="456.0" layoutY="356.0" text="Product Name:" />
             <TextField fx:id="singlepriceText" editable="false" layoutX="456.0" layoutY="415.0" />
@@ -92,16 +79,16 @@
             <Label layoutX="456.0" layoutY="442.0" text="Bulk Price:" />
             <TextField fx:id="productID" editable="false" layoutX="456.0" layoutY="331.0" />
             <Label layoutX="456.0" layoutY="314.0" text="No." />
-            <Button layoutX="550.0" layoutY="96.0" mnemonicParsing="false" onAction="#userlogin" text="Login" />
+            <Button layoutX="624.0" layoutY="56.0" mnemonicParsing="false" onAction="#userlogin" text="Login" />
             <Label layoutX="25.0" layoutY="56.0" text="Search:" />
             <ChoiceBox fx:id="selectProductCategory" layoutX="71.0" layoutY="52.0" prefWidth="150.0" />
             <TextField fx:id="searchText" layoutX="25.0" layoutY="86.0" prefHeight="25.0" prefWidth="195.0" />
-            <Button layoutX="232.0" layoutY="87.0" mnemonicParsing="false" onAction="#searchProducts" text="Search" />
-            <TabPane layoutX="683.0" layoutY="43.0" prefHeight="787.0" prefWidth="543.0" tabClosingPolicy="UNAVAILABLE">
+            <Button layoutX="257.0" layoutY="86.0" mnemonicParsing="false" onAction="#searchProducts" text="Search" />
+            <TabPane layoutX="707.0" layoutY="5.0" prefHeight="700.0" prefWidth="543.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Shopping Cart">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="671.0" prefWidth="543.0">
                            <children>
                               <TableView fx:id="shoppingcart" layoutX="6.0" layoutY="7.0" onMouseClicked="#selectitemshoppingcart" prefHeight="507.0" prefWidth="369.0" />
                               <Label fx:id="totalLabel" layoutX="6.0" layoutY="514.0" prefHeight="106.0" prefWidth="369.0" text="Total:" />
@@ -121,6 +108,14 @@
                 </Tab>
               </tabs>
             </TabPane>
+            <Label layoutX="457.0" layoutY="90.0" text="Password:" />
+            <PasswordField fx:id="clientPassword" layoutX="456.0" layoutY="115.0" />
+            <Label layoutX="461.0" layoutY="149.0" text="ClientID:" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="800.0" prefWidth="1600.0">
+         <children>
+            <Label fx:id="productDescLabel1" layoutX="25.0" layoutY="657.0" prefHeight="137.0" prefWidth="407.0" wrapText="true" />
          </children>
       </AnchorPane>
    </children>
