@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1265.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <AnchorPane prefHeight="800.0" prefWidth="1265.0">
+         <children>
+            <TabPane layoutY="6.0" prefHeight="800.0" prefWidth="1265.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab text="Clients">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="771.0" prefWidth="1490.0">
+                           <children>
+                              <TableView fx:id="CustomerTable" layoutX="14.0" layoutY="7.0" onMouseClicked="#selectCostumer" prefHeight="751.0" prefWidth="871.0" />
+                              <Label layoutX="895.0" layoutY="14.0" text="Client-Managment" />
+                              <TabPane layoutX="895.0" layoutY="135.0" prefHeight="442.0" prefWidth="359.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Add Client">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Label layoutX="44.0" layoutY="36.0" text="Clientname:" />
+                                                <Label layoutX="44.0" layoutY="87.0" text="Clientaddress:" />
+                                                <Label layoutX="44.0" layoutY="141.0" text="Clientemail:" />
+                                                <Label layoutX="44.0" layoutY="193.0" text="Clientphone:" />
+                                                <Label layoutX="44.0" layoutY="245.0" text="Shippingarea:" />
+                                                <TextField fx:id="clientName1" layoutX="62.0" layoutY="59.0" prefHeight="25.0" prefWidth="210.0" />
+                                                <TextField fx:id="clientAddress1" layoutX="62.0" layoutY="113.0" prefHeight="25.0" prefWidth="237.0" />
+                                                <TextField fx:id="clientEmail1" layoutX="62.0" layoutY="165.0" prefHeight="25.0" prefWidth="236.0" />
+                                                <TextField fx:id="clientPhone1" layoutX="62.0" layoutY="217.0" prefHeight="25.0" prefWidth="193.0" />
+                                                <TextField fx:id="shippingAreaText1" layoutX="60.0" layoutY="267.0" prefHeight="25.0" prefWidth="92.0" />
+                                                <Label layoutX="-781.0" layoutY="-9.0" text="Clientname:" />
+                                                <Label layoutX="-781.0" layoutY="42.0" text="Clientaddress:" />
+                                                <Label layoutX="-781.0" layoutY="96.0" text="Clientemail:" />
+                                                <Label layoutX="-781.0" layoutY="148.0" text="Clientphone:" />
+                                                <Label layoutX="-781.0" layoutY="200.0" text="Shippingarea:" />
+                                                <Button layoutX="262.0" layoutY="292.0" mnemonicParsing="false" onAction="#addClient" text="Add Client" />
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                  <Tab text="Edit Client">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <Label layoutX="18.0" layoutY="14.0" text="Client No." />
+                                                <TextField fx:id="clientIDText" editable="false" layoutX="18.0" layoutY="31.0" prefHeight="25.0" prefWidth="55.0" />
+                                                <Label layoutX="18.0" layoutY="65.0" text="Clientname:" />
+                                                <Label layoutX="18.0" layoutY="116.0" text="Clientaddress:" />
+                                                <Label layoutX="18.0" layoutY="170.0" text="Clientemail:" />
+                                                <Label layoutX="18.0" layoutY="222.0" text="Clientphone:" />
+                                                <Label layoutX="18.0" layoutY="274.0" text="Shippingarea:" />
+                                                <TextField fx:id="clientName" layoutX="18.0" layoutY="82.0" prefHeight="25.0" prefWidth="230.0" />
+                                                <TextField fx:id="clientAddress" layoutX="18.0" layoutY="133.0" prefHeight="25.0" prefWidth="334.0" />
+                                                <TextField fx:id="clientEmail" layoutX="17.0" layoutY="187.0" prefHeight="25.0" prefWidth="198.0" />
+                                                <TextField fx:id="clientPhone" layoutX="18.0" layoutY="239.0" />
+                                                <TextField fx:id="shippingAreaText" layoutX="17.0" layoutY="291.0" prefHeight="25.0" prefWidth="88.0" />
+                                                <Button layoutX="261.0" layoutY="260.0" mnemonicParsing="false" onAction="#updateClient" text="Update Client" />
+                                                <Button layoutX="263.0" layoutY="302.0" mnemonicParsing="false" onAction="#deleteClient" text="Delete Client" />
+                                             </children>
+                                          </AnchorPane>
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                              <Label layoutX="904.0" layoutY="42.0" prefHeight="21.0" prefWidth="41.0" text="Search:" />
+                              <ChoiceBox fx:id="choiceBoxSearch" layoutX="963.0" layoutY="40.0" prefWidth="150.0" />
+                              <TextField fx:id="SearchField" layoutX="904.0" layoutY="75.0" prefHeight="25.0" prefWidth="209.0" />
+                              <Button layoutX="1129.0" layoutY="75.0" mnemonicParsing="false" onAction="#searchClientDB" text="Search" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Warehouse">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
