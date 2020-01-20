@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 17. Jan 2020 um 13:30
+-- Erstellungszeit: 20. Jan 2020 um 11:17
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -30,6 +30,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `client` (
   `clientID` int(11) NOT NULL,
+  `username` varchar(30) COLLATE utf8_german2_ci NOT NULL,
+  `password` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `clientname` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `clientaddress` varchar(60) COLLATE utf8_german2_ci NOT NULL,
   `clientemail` varchar(30) COLLATE utf8_german2_ci NOT NULL,
@@ -41,23 +43,23 @@ CREATE TABLE `client` (
 -- Daten für Tabelle `client`
 --
 
-INSERT INTO `client` (`clientID`, `clientname`, `clientaddress`, `clientemail`, `clientphone`, `shippingarea`) VALUES
-(1, 'Mister Hemp', 'Landstraße 72, 4020 Linz', 'hemp@green.com', '+4366412349330', 'NORD'),
-(2, 'Super Trooper', 'Weitwegweg 999, 1060 Wien', 'trooper@deathstar.com', '+43680596404', 'OST'),
-(3, 'Daniela Tunichtgut', 'Josefgasse 11, 9020 Klagenfurt', 'unfug@bledsinn.com', '+436763049404', 'SÜD'),
-(4, 'John Wick', 'Brennendes Höllentor 666, 6020 Innsbruck', 'john@wick.com', '+436649787775', 'WEST'),
-(5, 'Matthias Riedl', 'Kettenbrückengasse 23, 4020 Linz', 'matthias.riedl@expleo.com', '+43664523449', 'NORD'),
-(6, 'Wolfgang Figl', 'Musterweg 34, 1040 Wien', 'wolfgang.figl@expleo.com', '+436761234098', 'OST'),
-(7, 'Markus Gehbauer', 'Keltengasse 4, 9020 Klagenfurt', 'mgehbauer@gmail.com', '+436992348906', 'SÜD'),
-(8, 'Marion Herms', 'Gertergasse 87, 6020 Innsbruck', 'herms@gmail.com', '+4368012367593', 'WEST'),
-(9, 'Daniela Suchny', 'Reiterweg 4, 4020 Linz', 'danisuchny@gmail.com', '+436804356777', 'NORD'),
-(10, 'Peter Suchny', 'Reiterweg 4, 1080 Wien', 'petersuchny@gmail.com', '+436804829437', 'OST'),
-(11, 'Edmund Sackbauer', 'Hasengasse 38, 9020 Klagenfurt', 'mundl@gmail.com', '+4367687345690', 'SÜD'),
-(12, 'Otto Bauer', 'Josef-Messner-Straße 12, 6020 Innsbruck', 'ottob@gmx.at', '+43664130303', 'WEST'),
-(13, 'Hermine Granger', 'Muggelweg 45, 4020 Linz', 'hermineg@wizzard.wz', '+436993567544', 'NORD'),
-(14, 'Dobby Elf', 'Winkelgasse 1, 1210 Wien', 'dobbyelf@gmail.com', '+436808887754', 'OST'),
-(15, 'Martina Haselnuss', 'Nussgasse 42, 9020 Klagenfurt', 'nusserl@spongebob.com', '+4366022233444', 'SÜD'),
-(16, 'Sigmund Ferdanz', 'Stummergasse 6, 6020 Innsbruck', 'sigi@hotmail.com', '+43664122233', 'WEST');
+INSERT INTO `client` (`clientID`, `username`, `password`, `clientname`, `clientaddress`, `clientemail`, `clientphone`, `shippingarea`) VALUES
+(1, 'user1', 'password1', 'Mister Hemp', 'Landstraße 72, 4020 Linz', 'hemp@green.com', '+4366412349330', 'NORD'),
+(2, 'user2', 'password2', 'Super Trooper', 'Weitwegweg 999, 1060 Wien', 'trooper@deathstar.com', '+43680596404', 'OST'),
+(3, 'user3', 'password3', 'Daniela Tunichtgut', 'Josefgasse 11, 9020 Klagenfurt', 'unfug@bledsinn.com', '+436763049404', 'SÜD'),
+(4, 'user4', 'password4', 'John Wick', 'Brennendes Höllentor 666, 6020 Innsbruck', 'john@wick.com', '+436649787775', 'WEST'),
+(5, 'user5', 'password5', 'Matthias Riedl', 'Kettenbrückengasse 23, 4020 Linz', 'matthias.riedl@expleo.com', '+43664523449', 'NORD'),
+(6, 'user6', 'password6', 'Wolfgang Figl', 'Musterweg 34, 1040 Wien', 'wolfgang.figl@expleo.com', '+436761234098', 'OST'),
+(7, 'user7', 'password7', 'Markus Gehbauer', 'Keltengasse 4, 9020 Klagenfurt', 'mgehbauer@gmail.com', '+436992348906', 'SÜD'),
+(8, 'user8', 'password8', 'Marion Herms', 'Gertergasse 87, 6020 Innsbruck', 'herms@gmail.com', '+4368012367593', 'WEST'),
+(9, 'user9', 'password9', 'Daniela Suchny', 'Reiterweg 4, 4020 Linz', 'danisuchny@gmail.com', '+436804356777', 'NORD'),
+(10, 'user10', 'password10', 'Peter Suchny', 'Reiterweg 4, 1080 Wien', 'petersuchny@gmail.com', '+436804829437', 'OST'),
+(11, 'user11', 'password11', 'Edmund Sackbauer', 'Hasengasse 38, 9020 Klagenfurt', 'mundl@gmail.com', '+4367687345690', 'SÜD'),
+(12, 'user12', 'password12', 'Otto Bauer', 'Josef-Messner-Straße 12, 6020 Innsbruck', 'ottob@gmx.at', '+43664130303', 'WEST'),
+(13, 'user13', 'password13', 'Hermine Granger', 'Muggelweg 45, 4020 Linz', 'hermineg@wizzard.wz', '+436993567544', 'NORD'),
+(14, 'user14', 'password14', 'Dobby Elf', 'Winkelgasse 1, 1210 Wien', 'dobbyelf@gmail.com', '+436808887754', 'OST'),
+(15, 'user15', 'password15', 'Martina Haselnuss', 'Nussgasse 42, 9020 Klagenfurt', 'nusserl@spongebob.com', '+4366022233444', 'SÜD'),
+(16, 'user16', 'password16', 'Sigmund Ferdanz', 'Stummergasse 6, 6020 Innsbruck', 'sigi@hotmail.com', '+43664122233', 'WEST');
 
 -- --------------------------------------------------------
 
@@ -199,7 +201,11 @@ INSERT INTO `orderlist` (`orderlistID`, `orderID_FK`) VALUES
 (13, 13),
 (14, 14),
 (15, 15),
-(16, 16);
+(16, 16),
+(17, 17),
+(18, 18),
+(19, 19),
+(20, 20);
 
 -- --------------------------------------------------------
 
@@ -213,7 +219,7 @@ CREATE TABLE `ordertab` (
   `total` float NOT NULL,
   `date` date NOT NULL,
   `clientID` int(11) NOT NULL,
-  `shippingteamID_FK` int(11) NOT NULL
+  `shippingteamID_FK` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_german2_ci;
 
 --
@@ -236,7 +242,11 @@ INSERT INTO `ordertab` (`orderID`, `status`, `total`, `date`, `clientID`, `shipp
 (13, 1, 999.99, '2019-12-12', 13, 1),
 (14, 1, 333.89, '2019-12-09', 14, 2),
 (15, 2, 639.89, '2020-01-21', 15, 3),
-(16, 1, 70.89, '2020-01-09', 16, 4);
+(16, 1, 70.89, '2020-01-09', 16, 4),
+(17, 0, 8, '2020-01-18', 4, 1),
+(18, 0, 11, '2020-01-19', 3, 1),
+(19, 0, 11, '2020-01-19', 3, 1),
+(20, 0, 17, '2020-01-19', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -557,13 +567,13 @@ ALTER TABLE `manufacturer`
 -- AUTO_INCREMENT für Tabelle `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT für Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT für Tabelle `product`
