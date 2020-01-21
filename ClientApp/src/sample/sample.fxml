@@ -98,7 +98,7 @@
             <Label id="labelID" layoutX="456.0" layoutY="442.0" text="Bulk Price:" />
             <TextField fx:id="productID" editable="false" layoutX="456.0" layoutY="331.0" />
             <Label id="labelID" layoutX="456.0" layoutY="314.0" text="No." textFill="WHITE" />
-            <Button layoutX="550.0" layoutY="96.0" mnemonicParsing="false" onAction="#userlogin" text="Login" />
+            <Button layoutX="460.0" layoutY="152.0" mnemonicParsing="false" onAction="#userlogin" text="Login" />
             <Label id="labelID" layoutX="25.0" layoutY="56.0" text="Search:" textFill="#f8f7f7" />
             <ChoiceBox id="labelID" fx:id="selectProductCategory" accessibleText="test" layoutX="71.0" layoutY="52.0" prefWidth="150.0">
                <cursor>
@@ -144,13 +144,16 @@
                   <Image url="@orderlist.gif" />
                </image>
             </ImageView>
+            <PasswordField fx:id="clientPassword" layoutX="456.0" layoutY="110.0"/>
+            <Label id="labelID" layoutX="456.0" layoutY="91.0" text="Password:" textFill="WHITE" />
+            <Label id="labelID" layoutX="524.0" layoutY="152.0" text="Client ID:" textFill="WHITE" />
          </children>
          <effect>
             <Bloom />
          </effect>
-          <Label layoutX="460.0" layoutY="90.0" text="Password:" />
+         <!-- <Label layoutX="460.0" layoutY="90.0" text="Password:" />
           <PasswordField fx:id="clientPassword" layoutX="456.0" layoutY="145.0" />
-          <Label layoutX="461.0" layoutY="190.0" text="ClientID:" />
+          <Label layoutX="461.0" layoutY="190.0" text="ClientID:" />-->
       </AnchorPane>
    </children>
 </VBox>

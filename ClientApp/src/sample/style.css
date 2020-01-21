@@ -77,7 +77,7 @@ TableView .list-cell: hover {
     -fx-padding: 1px;
 }
 
-TextField {
+TextField, PasswordField {
     -fx-text-inner-color: #e6da02;
     -fx-background-color: #595959;
     -fx-border-style: solid inside;
@@ -92,8 +92,18 @@ TextField:hover {
     -fx-font-weight: bold;
 }
 
+PasswordField:hover {
+    -fx-border-color: #eaff00;
+    -fx-border-width: 1.8;
+    -fx-font-weight: bold;
+}
+
 TextField:focused {
     -fx-background-color: #2B2B2B;
+}
+
+PasswordField:focused {
+-fx-background-color: #2B2B2B;
 }
 
 ChoiceBox {
