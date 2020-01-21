@@ -91,23 +91,23 @@
                <effect>
                   <MotionBlur />
                </effect></Button>
-            <TabPane layoutX="744.0" layoutY="129.0" prefHeight="660.0" prefWidth="445.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane id="bigTabs" layoutX="744.0" layoutY="129.0" prefHeight="527.0" prefWidth="445.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Shopping Cart">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="431.0">
                            <children>
-                              <TableView fx:id="shoppingcart" layoutX="6.0" layoutY="7.0" onMouseClicked="#selectitemshoppingcart" prefHeight="507.0" prefWidth="454.0" />
+                              <TableView fx:id="shoppingcart" layoutX="6.0" layoutY="7.0" onMouseClicked="#selectitemshoppingcart" prefHeight="339.0" prefWidth="454.0" />
                            </children>
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Orders">
+                <Tab id="bigTab" text="Orders">
                   <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="741.0" prefWidth="543.0">
+                    <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="431.0">
                            <children>
-                              <TableView fx:id="orderListTable" layoutX="16.0" layoutY="6.0" onMouseClicked="#selectitemorderlist" prefHeight="291.0" prefWidth="511.0" />
-                              <TableView fx:id="productorderTable" layoutX="16.0" layoutY="305.0" prefHeight="442.0" prefWidth="511.0" />
+                              <TableView fx:id="orderListTable" layoutX="-4.0" layoutY="-1.0" onMouseClicked="#selectitemorderlist" prefHeight="236.0" prefWidth="511.0" />
+                              <TableView fx:id="productorderTable" layoutX="-4.0" layoutY="236.0" prefHeight="259.0" prefWidth="511.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -166,7 +166,7 @@
                         <Button id="deletebtn" layoutX="167.0" layoutY="66.0" mnemonicParsing="false" onAction="#deletefromshoppingcart" text="delete item" />
                         <Button layoutX="20.0" layoutY="66.0" mnemonicParsing="false" onAction="#updateamount" text="update amount" />
                      </children></AnchorPane>
-                  <Label id="topID" fx:id="totalLabel" layoutX="181.0" layoutY="193.0" prefHeight="40.0" prefWidth="100.0" text="Total: ">
+                  <Label id="topID" fx:id="totalLabel" layoutX="181.0" layoutY="193.0" prefHeight="40.0" prefWidth="100.0" text="Total:  ">
                      <font>
                         <Font size="13.0" />
                      </font>
