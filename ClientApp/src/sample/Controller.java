@@ -78,7 +78,6 @@ public class Controller {
       }
       selectProductCategory.getItems().add("All");
   }
-
   private void createAllProductsTable() throws SQLException {
       ObservableList allproductsList = FXCollections.observableArrayList();
       Statement stmt = con.createStatement();
@@ -251,7 +250,6 @@ public class Controller {
     }
     energydrinksproducts.setItems(energydrinksproductsList);
   }
-
   public void selectAllProductsTable() throws SQLException {
     amountText.setText("");
     String selectedItem = allproducts.getSelectionModel().getSelectedItem().toString();
@@ -359,7 +357,6 @@ public class Controller {
             buffsum = bigDecimalBulkPrice.multiply(new BigDecimal(Integer.parseInt(amountText.getText())));
         }
     }
-
   public void addtoshoppingcart() {
       BigDecimal bigDecimalTotal= BigDecimal.ZERO;
       BigDecimal bigDecimalSinglePrice=new BigDecimal(singlepriceText.getText());
@@ -387,13 +384,11 @@ public class Controller {
     sum = sum.add(bigDecimalTotal);
     totalLabel.setText("Total:" + sum.toString() + "€");
   }
-
   public void deletefromshoppingcart() {
     shoppingcart.getItems().remove(shoppingcart.getSelectionModel().getSelectedItem());
     sum = sum.subtract(buffsum);
     totalLabel.setText("Total:" + sum.toString() + "€");
   }
-
   public void updateamount() throws SQLException {
 
       sum = sum.subtract(buffsum);
@@ -424,7 +419,6 @@ public class Controller {
     sum = sum.add(bigDecimalTotal);
     totalLabel.setText("Total:" + sum.toString() + "€");
   }
-
   public void userlogin() throws SQLException {
 
     Statement stmt2 = con.createStatement();
@@ -476,10 +470,6 @@ public class Controller {
         orderListTable.setItems(orderList);
     }
     }
-
-
-
-
   public void selectitemorderlist() throws SQLException {
 
     productorderList.clear();
@@ -530,7 +520,6 @@ public class Controller {
     // FINALLY ADDED TO TableView
     productorderTable.setItems(productorderList);
   }
-
   public void sendorder() throws SQLException {
 
       totalLabel.setText("Total: ");
@@ -734,4 +723,5 @@ public class Controller {
         }
 
     }
+
 }
