@@ -23,13 +23,13 @@
    <children>
       <AnchorPane id="a1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #404040;" stylesheets="@style.css">
          <children>
-            <TabPane id="bigTabs" layoutX="25.0" layoutY="127.0" prefHeight="493.0" prefWidth="407.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane id="bigTabs" layoutX="19.0" layoutY="129.0" prefHeight="493.0" prefWidth="407.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                   <Tab text="All">
                       <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                               <children>
-                                  <TableView fx:id="allproducts" layoutX="-3.0" onMouseClicked="#selectAllProductsTable" prefHeight="465.0" prefWidth="414.0" />
+                                  <TableView fx:id="allproducts" layoutX="-3.0" onMouseClicked="#selectAllProductsTable" prefHeight="451.0" prefWidth="414.0" />
                               </children>
                           </AnchorPane>
                       </content>
@@ -69,16 +69,9 @@
                   </Tab>
               </tabs>
             </TabPane>
-            <Button layoutX="573.0" layoutY="646.0" mnemonicParsing="false" onAction="#sendorder" text="send order" />
-            <Button layoutX="572.0" layoutY="606.0" mnemonicParsing="false" onAction="#deletefromshoppingcart" text="delete item" />
-            <Button layoutX="550.0" layoutY="568.0" mnemonicParsing="false" onAction="#updateamount" text="update amount" />
-            <Button layoutX="495.0" layoutY="537.0" mnemonicParsing="false" onAction="#addtoshoppingcart" text="add item to shopping cart" />
-            <TextField fx:id="amountText" layoutX="452.0" layoutY="501.0" prefHeight="25.0" prefWidth="64.0" />
-            <Label id="labelID" layoutX="452.0" layoutY="484.0" text="Amount:" />
-            <Label fx:id="productDescLabel" layoutX="25.0" layoutY="657.0" prefHeight="137.0" prefWidth="407.0" wrapText="true" />
             <Label id="topID" fx:id="thema" layoutX="25.0" layoutY="14.0" text="Client ordering software">
                <font>
-                  <Font name="Arial Bold" size="18.0" />
+                  <Font name="Arial Bold" size="22.0" />
                </font>
                <textFill>
                   <LinearGradient endX="1.0" endY="1.0">
@@ -88,17 +81,6 @@
                      </stops>
                   </LinearGradient>
                </textFill></Label>
-             <TextField fx:id="clientUsername" layoutX="456.0" layoutY="135.0" />
-            <Label id="login" layoutX="456.0" layoutY="118.0" text="Username:" textFill="WHITE" />
-            <TextField fx:id="productnameText" editable="false" layoutX="456.0" layoutY="373.0" />
-            <Label id="labelID" layoutX="456.0" layoutY="356.0" text="Product Name:" />
-            <TextField fx:id="singlepriceText" editable="false" layoutX="456.0" layoutY="415.0" />
-            <Label id="labelID" layoutX="456.0" layoutY="398.0" text="Single Price:" />
-            <TextField fx:id="bulkpriceText" editable="false" layoutX="456.0" layoutY="459.0" />
-            <Label id="labelID" layoutX="456.0" layoutY="442.0" text="Bulk Price:" />
-            <TextField fx:id="productID" editable="false" layoutX="456.0" layoutY="312.0" />
-            <Label id="labelID" layoutX="456.0" layoutY="295.0" text="No.:" textFill="WHITE" />
-            <Button id="login" layoutX="460.0" layoutY="231.0" mnemonicParsing="false" onAction="#userlogin" text="Login" />
             <Label id="labelID" layoutX="25.0" layoutY="56.0" text="Search:" textFill="#f8f7f7" />
             <ChoiceBox id="labelID" fx:id="selectProductCategory" accessibleText="test" layoutX="71.0" layoutY="52.0" prefWidth="150.0">
                <cursor>
@@ -109,14 +91,13 @@
                <effect>
                   <MotionBlur />
                </effect></Button>
-            <TabPane layoutX="683.0" layoutY="43.0" prefHeight="787.0" prefWidth="445.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutX="744.0" layoutY="129.0" prefHeight="660.0" prefWidth="445.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab text="Shopping Cart">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TableView fx:id="shoppingcart" layoutX="6.0" layoutY="7.0" onMouseClicked="#selectitemshoppingcart" prefHeight="507.0" prefWidth="454.0" />
-                              <Label id="labelID" fx:id="totalLabel" layoutX="6.0" layoutY="514.0" prefHeight="106.0" prefWidth="369.0" text="Total:" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -134,24 +115,70 @@
               </tabs>
             </TabPane>
 
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="244.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="288.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@search_icon.gif" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="1141.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="1143.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@orderlist.gif" />
                </image>
             </ImageView>
-            <PasswordField id="login" fx:id="clientPassword" layoutX="456.0" layoutY="189.0" />
-            <Label id="login" layoutX="456.0" layoutY="170.0" text="Password:" textFill="WHITE" />
-            <Label id="login" layoutX="524.0" layoutY="231.0" text="Client ID:" textFill="WHITE" />
-            <Label id="topID" layoutX="456.0" layoutY="91.0" text="LOGIN">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
+            <AnchorPane id="bigTabs" layoutX="390.0" layoutY="41.0" prefHeight="79.0" prefWidth="401.0">
+               <children>
+                  <Label id="topID" layoutX="17.0" layoutY="7.0" text="LOGIN">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                   <TextField id="loginfield" fx:id="clientUsername" layoutX="11.0" layoutY="32.0" promptText="Username" />
+                  <PasswordField id="loginfield" fx:id="clientPassword" layoutX="164.0" layoutY="32.0" promptText="Password" />
+                  <Button id="login" layoutX="329.0" layoutY="34.0" mnemonicParsing="false" onAction="#userlogin" text="Login" />
+                  <Label id="login" layoutX="329.0" layoutY="10.0" text="Client ID:" textFill="WHITE">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane id="bigTabs" layoutX="429.0" layoutY="163.0" prefHeight="493.0" prefWidth="313.0">
+               <children>
+                  <Label id="topID" layoutX="16.0" layoutY="6.0" text="OVERVIEW">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="productID" editable="false" layoutX="15.0" layoutY="58.0" prefHeight="29.0" prefWidth="115.0" />
+                  <Label id="labelID" layoutX="15.0" layoutY="39.0" text="No.:" textFill="WHITE" />
+                  <TextField fx:id="productnameText" editable="false" layoutX="181.0" layoutY="58.0" prefWidth="115.0" />
+                  <Label id="labelID" layoutX="182.0" layoutY="39.0" text="Product Name:" />
+                  <TextField fx:id="singlepriceText" editable="false" layoutX="15.0" layoutY="129.0" prefWidth="115.0" />
+                  <Label id="labelID" layoutX="15.0" layoutY="109.0" text="Single Price:" />
+                  <TextField fx:id="bulkpriceText" editable="false" layoutX="181.0" layoutY="129.0" prefWidth="115.0" />
+                  <Label id="labelID" layoutX="181.0" layoutY="109.0" text="Bulk Price:" />
+                  <TextField fx:id="amountText" layoutX="15.0" layoutY="198.0" prefHeight="25.0" prefWidth="115.0" />
+                  <Label id="labelID" layoutX="16.0" layoutY="179.0" text="Amount:" />
+                  <AnchorPane id="bigTabs" layoutX="14.0" layoutY="240.0" prefHeight="113.0" prefWidth="285.0">
+                     <children>
+                        <Button layoutX="20.0" layoutY="21.0" mnemonicParsing="false" onAction="#addtoshoppingcart" text="add item ² cart" />
+                        <Button layoutX="167.0" layoutY="21.0" mnemonicParsing="false" onAction="#sendorder" text="send order" />
+                        <Button id="deletebtn" layoutX="167.0" layoutY="66.0" mnemonicParsing="false" onAction="#deletefromshoppingcart" text="delete item" />
+                        <Button layoutX="20.0" layoutY="66.0" mnemonicParsing="false" onAction="#updateamount" text="update amount" />
+                     </children></AnchorPane>
+                  <Label id="topID" fx:id="totalLabel" layoutX="181.0" layoutY="193.0" prefHeight="40.0" prefWidth="100.0" text="Total: ">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label id="labelID" fx:id="productDescLabel" alignment="TOP_LEFT" layoutX="25.0" layoutY="388.0" prefHeight="90.0" prefWidth="264.0" wrapText="true" />
+                  <Label id="topID" layoutX="16.0" layoutY="365.0" text="INFO">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </children>
          <effect>
             <Bloom />
