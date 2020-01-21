@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 20. Jan 2020 um 11:17
+-- Erstellungszeit: 21. Jan 2020 um 10:52
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -205,7 +205,9 @@ INSERT INTO `orderlist` (`orderlistID`, `orderID_FK`) VALUES
 (17, 17),
 (18, 18),
 (19, 19),
-(20, 20);
+(20, 20),
+(21, 21),
+(22, 22);
 
 -- --------------------------------------------------------
 
@@ -215,7 +217,7 @@ INSERT INTO `orderlist` (`orderlistID`, `orderID_FK`) VALUES
 
 CREATE TABLE `ordertab` (
   `orderID` int(11) NOT NULL,
-  `status` int(1) NOT NULL,
+  `status` varchar(30) COLLATE utf8_german2_ci NOT NULL,
   `total` float NOT NULL,
   `date` date NOT NULL,
   `clientID` int(11) NOT NULL,
@@ -227,26 +229,28 @@ CREATE TABLE `ordertab` (
 --
 
 INSERT INTO `ordertab` (`orderID`, `status`, `total`, `date`, `clientID`, `shippingteamID_FK`) VALUES
-(1, 0, 679.99, '2020-01-30', 1, 1),
-(2, 0, 799.99, '2020-02-12', 2, 2),
-(3, 1, 599.99, '2020-01-30', 3, 3),
-(4, 0, 99.79, '2020-02-12', 4, 4),
-(5, 0, 1129.89, '2019-12-18', 5, 1),
-(6, 1, 120.99, '2019-12-04', 6, 2),
-(7, 2, 458.99, '2020-01-06', 7, 3),
-(8, 1, 89.99, '2020-01-03', 8, 4),
-(9, 2, 129.79, '2019-12-19', 9, 1),
-(10, 0, 344.89, '2019-12-02', 10, 2),
-(11, 2, 4499.99, '2020-01-05', 11, 3),
-(12, 2, 19.99, '2020-01-03', 12, 4),
-(13, 1, 999.99, '2019-12-12', 13, 1),
-(14, 1, 333.89, '2019-12-09', 14, 2),
-(15, 2, 639.89, '2020-01-21', 15, 3),
-(16, 1, 70.89, '2020-01-09', 16, 4),
-(17, 0, 8, '2020-01-18', 4, 1),
-(18, 0, 11, '2020-01-19', 3, 1),
-(19, 0, 11, '2020-01-19', 3, 1),
-(20, 0, 17, '2020-01-19', 4, 1);
+(1, 'Order received', 679.99, '2020-01-05', 1, 1),
+(2, 'Order received', 799.99, '2020-01-12', 2, 2),
+(3, 'Order sent', 599.99, '2020-01-09', 3, 3),
+(4, 'Order received', 99.79, '2020-01-12', 4, 4),
+(5, 'Order received', 1129.89, '2019-12-18', 5, 1),
+(6, 'Order sent', 120.99, '2019-12-04', 6, 2),
+(7, 'Order completed', 458.99, '2020-01-06', 7, 3),
+(8, 'Order sent', 89.99, '2020-01-03', 8, 4),
+(9, 'Order completed', 129.79, '2019-12-19', 9, 1),
+(10, 'Order received', 344.89, '2019-12-02', 10, 2),
+(11, 'Order completed', 4499.99, '2020-01-05', 11, 3),
+(12, 'Order completed', 19.99, '2020-01-03', 12, 4),
+(13, 'Order sent', 999.99, '2019-12-12', 13, 1),
+(14, 'Order sent', 333.89, '2019-12-09', 14, 2),
+(15, 'Order completed', 639.89, '2020-01-21', 15, 3),
+(16, 'Order sent', 70.89, '2020-01-09', 16, 4),
+(17, 'Order received', 8, '2020-01-18', 4, 1),
+(18, 'Order received', 11, '2020-01-19', 3, 1),
+(19, 'Order received', 11, '2020-01-19', 3, 1),
+(20, 'Order received', 17, '2020-01-13', 4, 1),
+(21, '0', 11.4, '2020-01-21', 1, NULL),
+(22, '0', 11.4, '2020-01-21', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -273,7 +277,7 @@ CREATE TABLE `product` (
 
 INSERT INTO `product` (`productID`, `category`, `productname`, `description`, `instock`, `singleprice`, `bulkprice`, `availabilty`, `location`, `manuID`) VALUES
 (0, 'Coffee', 'Caffe Wakka Wakka', 'Get loco with the real wakka wakka taste!', 89, 8.99, 8.39, 1, 'Zone 2', 2),
-(1, 'Tea', 'Green Tee', 'Original Green Tea from China.', 900, 1.29, 1.09, 1, 'Zone 1', 1),
+(1, 'Tea', 'Green Tea', 'Original Green Tea from China.', 900, 1.29, 1.09, 1, 'Zone 1', 1),
 (2, 'Tea', 'Balck Tea', 'The taste is strong, bold, full-bodied flavor.', 0, 1.19, 0.99, 0, 'Zone 1', 1),
 (3, 'Tea', 'Chai Tea', 'Chai Tea is essentially black tea paired with warm spices.', 1000, 1.49, 1.39, 1, 'Zone 1', 1),
 (4, 'Tea', 'Herbal Tea', 'It\'s made from dried herbs, fruits, and flowers, which can create a wide range of delicate flavors.', 1000, 1.09, 0.97, 1, 'Zone 1', 1),
@@ -567,13 +571,13 @@ ALTER TABLE `manufacturer`
 -- AUTO_INCREMENT für Tabelle `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT für Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT für Tabelle `product`
