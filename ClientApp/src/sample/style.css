@@ -40,7 +40,7 @@
      -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
  }
 
- .button: focused {
+.button: focused {
      -fx-text-fill: red;
      -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
  }
@@ -78,7 +78,7 @@ TableView .list-cell: hover {
 }
 
 TextField {
-    -fx-text-inner-color: #eaff00;
+    -fx-text-inner-color: #e6da02;
     -fx-background-color: #595959;
     -fx-border-style: solid inside;
     -fx-border-color: #e6da02;
@@ -89,6 +89,7 @@ TextField {
 TextField:hover {
     -fx-border-color: #eaff00;
     -fx-border-width: 1.8;
+    -fx-font-weight: bold;
 }
 
 TextField:focused {

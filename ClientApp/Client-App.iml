@@ -12,5 +12,6 @@
     <orderEntry type="library" name="Downloads" level="project" />
     <orderEntry type="library" name="mysql-connector-java-8.0.18" level="project" />
     <orderEntry type="library" name="javafx.base" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.181" level="project" />
   </component>
 </module>
