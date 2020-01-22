@@ -114,7 +114,7 @@ TableView {
 }
 
 .table-view .column-header-background .filler {
-    -fx-background-color:  #404040;
+    -fx-background-color:  #383838;
     -fx-border-color: transparent;
 }
 
@@ -134,7 +134,7 @@ TableView {
 .table-view .cell{
    /*-fx-cell-size: 13;*/
   -fx-alignment: center-left;
-  -fx-background-color: #404040;
+  -fx-background-color: #383838;
   -fx-text-fill: lightgrey;
   -fx-alignment: CENTER;
   -fx-border-color: transparent;
