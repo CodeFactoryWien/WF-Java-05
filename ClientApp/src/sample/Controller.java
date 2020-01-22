@@ -56,7 +56,7 @@ public class Controller {
     shoppingcartCol.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
     shoppingcart.getColumns().add(shoppingcartCol);
     // Connection to the DB, happens only once
-    con =
+      con =
         DriverManager.getConnection(
             "jdbc:mysql://localhost:3306/" +
                     "feelgoodltd" +
@@ -301,7 +301,7 @@ public class Controller {
   public void selectItemsoftdrinks() throws SQLException {
     amountText.setText("");
     String selectedItem = softdrinksproducts.getSelectionModel().getSelectedItem().toString();
-    String[] buff = selectedItem.split(",");
+    String[] buff = selectedItem.split(", ");
     String buff3 = buff[0].substring(1);
     String[] buff2 = buff[3].split("]");
     productnameText.setText(buff[1]);
@@ -317,7 +317,7 @@ public class Controller {
   public void selectItemenergydrinks() throws SQLException {
     amountText.setText("");
     String selectedItem = energydrinksproducts.getSelectionModel().getSelectedItem().toString();
-    String[] buff = selectedItem.split(",");
+    String[] buff = selectedItem.split(", ");
     String buff3 = buff[0].substring(1);
     String[] buff2 = buff[3].split("]");
     productnameText.setText(buff[1]);
@@ -422,9 +422,17 @@ public class Controller {
   public void userlogin() throws SQLException {
 
     Statement stmt2 = con.createStatement();
-    if(stmt2.execute("SELECT username, password FROM client " +
+    ResultSet rs2 = stmt2.executeQuery("SELECT username, password FROM client " +
             "WHERE username LIKE('" +clientUsername.getText()+ "') AND " +
-            "password LIKE ('" +clientPassword.getText()+ "')")){
+            "password LIKE ('" +clientPassword.getText()+ "')");
+    String username = "";
+    String password = "";
+    while (rs2.next()){
+        username = rs2.getString("username");
+        System.out.println("username");
+        password = rs2.getString("password");
+    }
+    if(clientUsername.getText().equals(username) && password.equals(clientPassword.getText())){
         sum = BigDecimal.ZERO;
         buffsum = BigDecimal.ZERO;
         totalLabel.setText("Total: "+sum+"€");
@@ -468,6 +476,7 @@ public class Controller {
             orderList.add(row);
         }
         orderListTable.setItems(orderList);
+
     }
     }
   public void selectitemorderlist() throws SQLException {
@@ -540,21 +549,21 @@ public class Controller {
       while (rs2.next()){
           buffIDText = rs2.getString("clientID");
       }
-    rs = stmt.executeQuery("SELECT * FROM client WHERE ");
+    //rs = stmt.executeQuery("SELECT * FROM client WHERE ");
     stmt.execute(
         "INSERT INTO `ordertab`(`status`, `total`, `date`, `clientID`, `shippingteamID_FK`) "
-            + "VALUES (0,"
+            + "VALUES ('Orders received',"
             + sum
             + ",'"
             + dateString
             + "',"
             + buffIDText
             + ","
-            + "null)");
+            + "1)");
     stmt.execute("INSERT INTO `orderlist`(`orderID_FK`) VALUES (" + orderID_FK + ")");
-    rs = stmt.executeQuery("SELECT COUNT(orderlistID) FROM orderlist");
+    rs = stmt.executeQuery("SELECT MAX(orderlistID) FROM orderlist");
     while (rs.next()) {
-      orderlistID_FK = Integer.parseInt(rs.getString("COUNT(orderlistID)")) + 1;
+      orderlistID_FK = Integer.parseInt(rs.getString("MAX(orderlistID)")) + 1;
     }
     int buffID = 0;
     ObservableList buffList = shoppingcart.getItems();
@@ -574,7 +583,7 @@ public class Controller {
       stmt.execute(
           "INSERT INTO `productorderlist`(`orderlistID_FK`, `productID_FK`, `amount`, `subtotal`) "
               + "VALUES ("
-              + orderlistID_FK
+              + orderID_FK
               + ","
               + buffID
               + ","
@@ -587,11 +596,12 @@ public class Controller {
     orderList.clear();
     orderListTable.setItems(orderList);
     orderListTable.getColumns().clear();
-
+    orderListTable.getItems().clear();
+    //ResultSet resultSet = stmt.executeQuery("");
     rs =
         stmt.executeQuery(
             "SELECT orderID,status,total,date FROM ordertab WHERE clientID = "
-                + buffID);
+                + buffIDText);
     for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
       // We are using non property style for making dynamic table
       final int j = i;
@@ -616,6 +626,7 @@ public class Controller {
       orderList.add(row);
     }
     orderListTable.setItems(orderList);
+
     shoppingcartList.clear();
     shoppingcart.setItems(shoppingcartList);
     shoppingcart.refresh();
