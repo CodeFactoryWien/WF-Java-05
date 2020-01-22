@@ -38,7 +38,10 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="coffeeproducts" layoutX="-3.0" layoutY="-1.0" onMouseClicked="#selectItemcoffee" prefHeight="484.0" prefWidth="439.0" />
+                              <TableView fx:id="coffeeproducts" layoutX="-3.0" layoutY="-1.0" onMouseClicked="#selectItemcoffee" prefHeight="484.0" prefWidth="439.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></TableView>
                            </children>
                         </AnchorPane>
                   </content>
@@ -47,7 +50,10 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="teaproducts" layoutY="-1.0" onMouseClicked="#selectItemtea" prefHeight="485.0" prefWidth="436.0" />
+                              <TableView fx:id="teaproducts" layoutY="-1.0" onMouseClicked="#selectItemtea" prefHeight="485.0" prefWidth="436.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></TableView>
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -55,7 +61,10 @@
                       <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                               <children>
-                                  <TableView fx:id="softdrinksproducts" layoutY="-1.0" onMouseClicked="#selectItemsoftdrinks" prefHeight="482.0" prefWidth="436.0" />
+                                  <TableView fx:id="softdrinksproducts" layoutY="-1.0" onMouseClicked="#selectItemsoftdrinks" prefHeight="482.0" prefWidth="436.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></TableView>
                               </children></AnchorPane>
                       </content>
                   </Tab>
@@ -63,7 +72,10 @@
                       <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                               <children>
-                                  <TableView fx:id="energydrinksproducts" layoutY="-1.0" onMouseClicked="#selectItemenergydrinks" prefHeight="483.0" prefWidth="436.0" />
+                                  <TableView fx:id="energydrinksproducts" layoutY="-1.0" onMouseClicked="#selectItemenergydrinks" prefHeight="483.0" prefWidth="436.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></TableView>
                               </children></AnchorPane>
                       </content>
                   </Tab>
@@ -97,7 +109,10 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="573.0" prefWidth="431.0">
                            <children>
-                              <TableView fx:id="shoppingcart" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#selectitemshoppingcart" prefHeight="483.0" prefWidth="454.0" />
+                              <TableView fx:id="shoppingcart" layoutX="-1.0" layoutY="-1.0" onMouseClicked="#selectitemshoppingcart" prefHeight="483.0" prefWidth="454.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></TableView>
                            </children>
                         </AnchorPane>
                   </content>
@@ -106,7 +121,10 @@
                   <content>
                     <AnchorPane maxHeight="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="431.0">
                            <children>
-                              <TableView fx:id="orderListTable" layoutX="-4.0" layoutY="-2.0" onMouseClicked="#selectitemorderlist" prefHeight="236.0" prefWidth="511.0" />
+                              <TableView fx:id="orderListTable" layoutX="-4.0" layoutY="-2.0" onMouseClicked="#selectitemorderlist" prefHeight="236.0" prefWidth="511.0">
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy></TableView>
                               <TableView fx:id="productorderTable" layoutX="-4.0" layoutY="236.0" prefHeight="259.0" prefWidth="511.0" />
                            </children>
                         </AnchorPane>

@@ -114,7 +114,7 @@ TableView {
 }
 
 .table-view .column-header-background .filler {
-    -fx-background-color:  #383838;
+    -fx-background-color:  #595959;
     -fx-border-color: transparent;
 }
 
@@ -149,6 +149,7 @@ TableView {
 
 .table-view .cell:focused {
     -fx-text-fill: #ff8c00;
+    -fx-border-radius: 5;
 }
 
 .table-view .increment-button ,.table-view .decrement-button {
