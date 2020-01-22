@@ -337,9 +337,9 @@ public class Controller {
         Statement stmt = con.createStatement();
         String buff = shoppingcart.getSelectionModel().getSelectedItem().toString();
         String[] buff2 = buff.split("No. ");
-        String[] buff3 = buff2[1].split(" productname: ");
-        String[] buff4 = buff3[1].split(" amount: ");
-        String[] buff5 = buff4[1].split(" total");
+        String[] buff3 = buff2[1].split(" ,productname: ");
+        String[] buff4 = buff3[1].split(" ,amount: ");
+        String[] buff5 = buff4[1].split(" ,subtotal");
         String buffID = buff3[0];
         productID.setText(buffID);
         productnameText.setText(buff4[0]);
@@ -373,23 +373,23 @@ public class Controller {
     shoppingcartList.add(
         "No. "
             + productID.getText()
-            + " productname: "
+            + " ,productname: "
             + productnameText.getText()
             + " "
-            + "amount: "
+            + ",amount: "
             + amountText.getText()
-            + " total: "
+            + " ,subtotal: "
             + total
             + "€");
     shoppingcart.setItems(shoppingcartList);
     shoppingcart.refresh();
     sum = sum.add(bigDecimalTotal);
-    totalLabel.setText("Total:" + sum.toString() + "€");
+    totalLabel.setText("Total: " + sum.toString() + "€");
   }
   public void deletefromshoppingcart() {
     shoppingcart.getItems().remove(shoppingcart.getSelectionModel().getSelectedItem());
     sum = sum.subtract(buffsum);
-    totalLabel.setText("Total:" + sum.toString() + "€");
+    totalLabel.setText("Total: " + sum.toString() + "€");
   }
   public void updateamount() throws SQLException {
 
@@ -408,18 +408,18 @@ public class Controller {
     shoppingcartList.add(
         "No. "
             + productID.getText()
-            + " productname: "
+            + " ,productname: "
             + productnameText.getText()
             + " "
-            + "amount: "
+            + ",amount: "
             + amountText.getText()
-            + " total: "
+            + " ,subtotal: "
             + total
             + "€");
     shoppingcart.setItems(shoppingcartList);
     shoppingcart.refresh();
     sum = sum.add(bigDecimalTotal);
-    totalLabel.setText("Total:" + sum.toString() + "€");
+    totalLabel.setText("Total: " + sum.toString() + "€");
   }
   public void userlogin() throws SQLException {
 
@@ -480,7 +480,7 @@ public class Controller {
             orderList.add(row);
         }
         orderListTable.setItems(orderList);
-        loginlabel.setText("Client ID: "+ clientID);
+        loginlabel.setText("Client ID: " + clientID + " logged in!");
     }
     }
   public void selectitemorderlist() throws SQLException {
