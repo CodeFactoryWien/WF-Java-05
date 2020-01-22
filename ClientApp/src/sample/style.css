@@ -136,7 +136,7 @@ TableView {
   -fx-alignment: center-left;
   -fx-background-color: #404040;
   -fx-text-fill: lightgrey;
-  -fx-alignment: CENTER_LEFT;
+  -fx-alignment: CENTER;
   -fx-border-color: transparent;
 }
 
