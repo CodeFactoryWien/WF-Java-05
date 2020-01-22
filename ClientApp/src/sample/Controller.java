@@ -480,7 +480,7 @@ public class Controller {
             orderList.add(row);
         }
         orderListTable.setItems(orderList);
-        loginlabel.setText("ClientID: "+ clientID);
+        loginlabel.setText("Client ID: "+ clientID);
     }
     }
   public void selectitemorderlist() throws SQLException {
