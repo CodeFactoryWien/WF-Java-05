@@ -23,13 +23,13 @@
    <children>
       <AnchorPane id="a1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #404040;" stylesheets="@style.css">
          <children>
-            <TabPane id="bigTabs" layoutX="19.0" layoutY="160.0" prefHeight="527.0" prefWidth="407.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane id="bigTabs" layoutX="19.0" layoutY="160.0" prefHeight="527.0" prefWidth="438.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                   <Tab id="listTabs" text="All">
                       <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                               <children>
-                                  <TableView fx:id="allproducts" layoutX="-2.0" layoutY="-4.0" onMouseClicked="#selectAllProductsTable" prefHeight="486.0" prefWidth="395.0" />
+                                  <TableView fx:id="allproducts" layoutX="-2.0" layoutY="-4.0" onMouseClicked="#selectAllProductsTable" prefHeight="486.0" prefWidth="437.0" />
                               </children>
                           </AnchorPane>
                       </content>
@@ -38,7 +38,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="coffeeproducts" layoutX="-3.0" layoutY="-1.0" onMouseClicked="#selectItemcoffee" prefHeight="484.0" prefWidth="414.0" />
+                              <TableView fx:id="coffeeproducts" layoutX="-3.0" layoutY="-1.0" onMouseClicked="#selectItemcoffee" prefHeight="484.0" prefWidth="439.0" />
                            </children>
                         </AnchorPane>
                   </content>
@@ -47,7 +47,7 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="teaproducts" layoutY="-1.0" onMouseClicked="#selectItemtea" prefHeight="485.0" prefWidth="407.0" />
+                              <TableView fx:id="teaproducts" layoutY="-1.0" onMouseClicked="#selectItemtea" prefHeight="485.0" prefWidth="436.0" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -55,7 +55,7 @@
                       <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                               <children>
-                                  <TableView fx:id="softdrinksproducts" layoutY="-1.0" onMouseClicked="#selectItemsoftdrinks" prefHeight="482.0" prefWidth="407.0" />
+                                  <TableView fx:id="softdrinksproducts" layoutY="-1.0" onMouseClicked="#selectItemsoftdrinks" prefHeight="482.0" prefWidth="436.0" />
                               </children></AnchorPane>
                       </content>
                   </Tab>
@@ -63,7 +63,7 @@
                       <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                               <children>
-                                  <TableView fx:id="energydrinksproducts" layoutY="-1.0" onMouseClicked="#selectItemenergydrinks" prefHeight="483.0" prefWidth="407.0" />
+                                  <TableView fx:id="energydrinksproducts" layoutY="-1.0" onMouseClicked="#selectItemenergydrinks" prefHeight="483.0" prefWidth="436.0" />
                               </children></AnchorPane>
                       </content>
                   </Tab>
@@ -91,7 +91,7 @@
                <effect>
                   <MotionBlur />
                </effect></Button>
-            <TabPane id="bigTabs" layoutX="744.0" layoutY="160.0" prefHeight="527.0" prefWidth="445.0" tabClosingPolicy="UNAVAILABLE">
+            <TabPane id="bigTabs" layoutX="770.0" layoutY="160.0" prefHeight="527.0" prefWidth="419.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab id="listTabs" text="Shopping Cart">
                   <content>
@@ -120,12 +120,12 @@
                   <Image url="@search_icon.gif" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="150.0" layoutX="1135.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="110.0" fitWidth="110.0" layoutX="1046.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@orderlist.gif" />
+                  <Image url="@Viel-Gulk-Logo_ANIM.gif" />
                </image>
             </ImageView>
-            <AnchorPane id="bigTabs" layoutX="390.0" layoutY="56.0" prefHeight="79.0" prefWidth="401.0">
+            <AnchorPane id="bigTabs" layoutX="411.0" layoutY="56.0" prefHeight="79.0" prefWidth="401.0">
                <children>
                   <Label id="topID" layoutX="17.0" layoutY="7.0" text="LOGIN">
                      <font>
@@ -135,14 +135,14 @@
                    <TextField id="loginfield" fx:id="clientUsername" layoutX="11.0" layoutY="32.0" promptText="Username" />
                   <PasswordField id="loginfield" fx:id="clientPassword" layoutX="164.0" layoutY="32.0" promptText="Password" />
                   <Button id="login" layoutX="329.0" layoutY="34.0" mnemonicParsing="false" onAction="#userlogin" text="Login" />
-                  <Label id="login" layoutX="329.0" layoutY="10.0" text="Client ID:" textFill="WHITE">
+                  <Label id="login" fx:id="loginlabel" layoutX="329.0" layoutY="10.0" text="Client ID:" textFill="WHITE">
                      <font>
                         <Font size="10.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
-            <AnchorPane id="bigTabs" layoutX="429.0" layoutY="194.0" prefHeight="493.0" prefWidth="313.0">
+            <AnchorPane id="bigTabs" layoutX="457.0" layoutY="194.0" prefHeight="493.0" prefWidth="313.0">
                <children>
                   <Label id="topID" layoutX="16.0" layoutY="6.0" text="OVERVIEW">
                      <font>

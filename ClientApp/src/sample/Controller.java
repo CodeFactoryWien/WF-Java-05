@@ -40,6 +40,7 @@ public class Controller {
   @FXML private TextField amountText;
   @FXML private TextField searchText;
 
+  @FXML private Label loginlabel;
   @FXML private Label totalLabel;
   @FXML private Label productDescLabel;
 
@@ -54,6 +55,7 @@ public class Controller {
 
   public void initialize() throws SQLException {
     shoppingcartCol.setCellValueFactory(param -> new ReadOnlyStringWrapper(param.getValue()));
+    shoppingcart.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     shoppingcart.getColumns().add(shoppingcartCol);
     // Connection to the DB, happens only once
       con =
@@ -422,12 +424,14 @@ public class Controller {
   public void userlogin() throws SQLException {
 
     Statement stmt2 = con.createStatement();
-    ResultSet rs2 = stmt2.executeQuery("SELECT username, password FROM client " +
+    ResultSet rs2 = stmt2.executeQuery("SELECT clientID, username, password FROM client " +
             "WHERE username LIKE('" +clientUsername.getText()+ "') AND " +
             "password LIKE ('" +clientPassword.getText()+ "')");
     String username = "";
     String password = "";
+    String clientID = "";
     while (rs2.next()){
+        clientID = rs2.getString("clientID");
         username = rs2.getString("username");
         System.out.println("username");
         password = rs2.getString("password");
@@ -476,7 +480,7 @@ public class Controller {
             orderList.add(row);
         }
         orderListTable.setItems(orderList);
-
+        loginlabel.setText("ClientID: "+ clientID);
     }
     }
   public void selectitemorderlist() throws SQLException {

@@ -123,11 +123,12 @@ TableView {
     -fx-padding: -1;
 }
 
-.table-view .column-header .label{
+.table-view .column-header .label {
    -fx-text-fill: #ffffff;
    -fx-background-color:  #595959;
    -fx-border-color: transparent;
-   
+   -fx-alignment: CENTER;
+   -fx-width: 12px;
 }
 
 .table-view .cell{
