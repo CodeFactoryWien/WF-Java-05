@@ -1,3 +1,7 @@
+.root {
+       -fx-font-family: "Arial Narrow";
+}
+
 #a1 {
      /*-fx-background-image: url("background.jpg");*/
      -fx-font-family: "Arial Narrow";
@@ -21,6 +25,13 @@
     -fx-text-fill: linear-gradient(#e6da02, #ff8c00);
     -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.3) , 0,0,0,1 );
     -fx-font-size: 18px;
+}
+
+#topsmallID {
+    -fx-text-fill: linear-gradient(#e6da02, #ff8c00);
+    -fx-effect: dropshadow( three-pass-box , rgba(255,255,255,0.3) , 0,0,0,1 );
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
 }
 
 .label {
@@ -201,6 +212,28 @@ ChoiceBox {
     -fx-border-color: #e6da02;
     -fx-border-radius: 5;
     -fx-border-style: solid inside;
+    -fx-font-weight: bold;
+    -fx-border-width: 1.5;
+}
+
+#textareaID {
+    -fx-border-style: solid inside;
+    -fx-border-width: 1;
+    -fx-border-insets: 5;
+    -fx-border-radius: 7;
+    -fx-padding: 3px;
+    -fx-border-color: grey;
+    -fx-background-color: #404040;
+    -fx-background-insets: 0, 1;
+    -fx-text-fill: linear-gradient(#e6da02, #ff8c00);
+}
+
+.text-area .content {
+    -fx-background-color: #404040;
+}
+
+#textareaID:hover {
+    -fx-border-color: #e6da02;
     -fx-font-weight: bold;
     -fx-border-width: 1.5;
 }
