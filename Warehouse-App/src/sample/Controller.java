@@ -12,6 +12,8 @@ import java.sql.*;
 
 public class Controller {
 
+    @FXML private TableView staffmemberTable;
+    @FXML private TableView orderTable;
     @FXML private TableView CustomerTable;
     @FXML private TableView loginDataTable;
     @FXML private TableView orderListTable;
@@ -19,6 +21,12 @@ public class Controller {
     @FXML private TableView productTable;
     @FXML private TextArea descriptionText;
     @FXML private TextArea descriptionText1;
+    @FXML private TextField staffnameText;
+    @FXML private TextField staffphoneText;
+    @FXML private TextField staffemailText;
+    @FXML private TextField staffaddressText;
+    @FXML private TextField staffIDText;
+    @FXML private TextField staffsvnumberText;
     @FXML private TextField singlePriceText;
     @FXML private TextField bulkpriceText;
     @FXML private TextField instockText;
@@ -44,6 +52,7 @@ public class Controller {
     @FXML private TextField clientPhone1;
     @FXML private TextField SearchFieldClient;
     @FXML private TextField SearchFieldProduct;
+    @FXML private TextField SearchFieldStaff;
     @FXML private ChoiceBox choiceBoxSearchClient;
     @FXML private ChoiceBox choiceBoxSearchProduct;
     @FXML private ChoiceBox choiceBoxProduct;
@@ -57,6 +66,10 @@ public class Controller {
     @FXML private ChoiceBox choiceBoxAvail1;
     @FXML private ChoiceBox choiceBoxLocation1;
     @FXML private ChoiceBox choiceBoxCategory1;
+    @FXML private ChoiceBox choiceBoxStaffSearch;
+    @FXML private ChoiceBox choiceBoxTeam;
+    @FXML private ChoiceBox choiceBoxRole;
+    @FXML private ChoiceBox choiceBoxShippingarea;
 
     private Connection con;
     DatabaseMetaData meta;
@@ -64,6 +77,8 @@ public class Controller {
     private ObservableList productorderList = FXCollections.observableArrayList();
     private ObservableList orderList = FXCollections.observableArrayList();
     private ObservableList productList = FXCollections.observableArrayList();
+    private ObservableList staffmemberList = FXCollections.observableArrayList();
+    private ObservableList order2List = FXCollections.observableArrayList();
 
     public void initialize() throws SQLException {
 
@@ -77,6 +92,8 @@ public class Controller {
                         "");
         createCostumerTable();
         createProductTable();
+        createStaffmemberTable();
+        createOrderTable();
         Statement statement = con.createStatement();
         ResultSet rs =
                 statement.executeQuery(
@@ -86,6 +103,26 @@ public class Controller {
             choiceBoxSearchClient.getItems().add(rs.getMetaData().getColumnName(i + 1));
         }
         choiceBoxSearchClient.setValue("-- Select Option --");
+    rs =
+        statement.executeQuery(
+            "SELECT sm.staffID," +
+                    "sm.staffname," +
+                    "sm.staffphone," +
+                    "sm.staffemail," +
+                    "sm.staffaddress," +
+                    "sm.staffsvnumber," +
+                    "sm.role," +
+                    "st.shippingarea," +
+                    "st.teamname " +
+                    "FROM staffmember sm " +
+                    "INNER JOIN shippingteam st " +
+                    "ON sm.shippingteamID = st.shippingteamID " +
+                    "WHERE 1");
+        choiceBoxStaffSearch.getItems().add("-- Select Option --");
+        for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+            choiceBoxStaffSearch.getItems().add(rs.getMetaData().getColumnName(i + 1));
+        }
+        choiceBoxStaffSearch.setValue("-- Select Option --");
         rs =
                 statement.executeQuery(
                         "SELECT p.productID,p.category,p.productname,p.description,p.location,m.manuname " +
@@ -154,6 +191,27 @@ public class Controller {
         choiceBoxArea1.getItems().add("OST");
         choiceBoxArea1.getItems().add("NORD");
         choiceBoxArea1.setValue("-- Select Option --");
+
+        choiceBoxTeam.getItems().add("-- Select Option --");
+        choiceBoxTeam.getItems().add("A");
+        choiceBoxTeam.getItems().add("B");
+        choiceBoxTeam.getItems().add("C");
+        choiceBoxTeam.getItems().add("D");
+        choiceBoxTeam.setValue("-- Select Option --");
+
+        choiceBoxRole.getItems().add("-- Select Option --");
+        choiceBoxRole.getItems().add("IT");
+        choiceBoxRole.getItems().add("Accounting");
+        choiceBoxRole.getItems().add("Sales");
+        choiceBoxRole.getItems().add("Warehouse Worker");
+        choiceBoxRole.setValue("-- Select Option --");
+
+        choiceBoxShippingarea.getItems().add("-- Select Option --");
+        choiceBoxShippingarea.getItems().add("WEST");
+        choiceBoxShippingarea.getItems().add("SÜD");
+        choiceBoxShippingarea.getItems().add("OST");
+        choiceBoxShippingarea.getItems().add("NORD");
+        choiceBoxShippingarea.setValue("-- Select Option --");
     }
     public void createCostumerTable() throws SQLException {
 
@@ -321,7 +379,8 @@ public class Controller {
         ResultSet rs;
         switch (choiceBoxSearchClient.getValue().toString()){
             case "clientID":
-                rs = stmt.executeQuery("SELECT * FROM client WHERE clientID = "+SearchFieldClient.getText());
+                rs = stmt.executeQuery("SELECT clientID,clientname,clientaddress,clientemail,clientphone,shippingarea" +
+                        " FROM client WHERE clientID = "+SearchFieldClient.getText());
                 CustomerTable.getItems().clear();
                 CustomerTable.getColumns().clear();
                 for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -350,7 +409,8 @@ public class Controller {
                 CustomerTable.setItems(CustomerList);
                 break;
             case "clientname":
-                rs = stmt.executeQuery("SELECT * FROM client WHERE clientname LIKE ('%"+SearchFieldClient.getText()+"%')");
+                rs = stmt.executeQuery("SELECT clientID,clientname,clientaddress,clientemail,clientphone,shippingarea" +
+                        " FROM client WHERE clientname LIKE ('%"+SearchFieldClient.getText()+"%')");
                 CustomerTable.getItems().clear();
                 CustomerTable.getColumns().clear();
                 for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -379,7 +439,8 @@ public class Controller {
                 CustomerTable.setItems(CustomerList);
                 break;
             case "clientaddress":
-                rs = stmt.executeQuery("SELECT * FROM client WHERE clientaddress LIKE ('%"+SearchFieldClient.getText()+"%')");
+                rs = stmt.executeQuery("SELECT clientID,clientname,clientaddress,clientemail,clientphone,shippingarea" +
+                        " FROM client WHERE clientaddress LIKE ('%"+SearchFieldClient.getText()+"%')");
                 CustomerTable.getItems().clear();
                 CustomerTable.getColumns().clear();
                 for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -408,7 +469,8 @@ public class Controller {
                 CustomerTable.setItems(CustomerList);
                 break;
             case "clientemail":
-                rs = stmt.executeQuery("SELECT * FROM client WHERE clientemail LIKE ('%"+SearchFieldClient.getText()+"%')");
+                rs = stmt.executeQuery("SELECT clientID,clientname,clientaddress,clientemail,clientphone,shippingarea" +
+                        " FROM client WHERE clientemail LIKE ('%"+SearchFieldClient.getText()+"%')");
                 CustomerTable.getItems().clear();
                 CustomerTable.getColumns().clear();
                 for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -437,7 +499,8 @@ public class Controller {
                 CustomerTable.setItems(CustomerList);
                 break;
             case "clientphone":
-                rs = stmt.executeQuery("SELECT * FROM client WHERE clientphone LIKE ('%"+SearchFieldClient.getText()+"%')");
+                rs = stmt.executeQuery("SELECT clientID,clientname,clientaddress,clientemail,clientphone,shippingarea" +
+                        " FROM client WHERE clientphone LIKE ('%"+SearchFieldClient.getText()+"%')");
                 CustomerTable.getItems().clear();
                 CustomerTable.getColumns().clear();
                 for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -466,7 +529,8 @@ public class Controller {
                 CustomerTable.setItems(CustomerList);
                 break;
             case "shippingarea":
-                rs = stmt.executeQuery("SELECT * FROM client WHERE shippingarea LIKE ('%"+SearchFieldClient.getText()+"%')");
+                rs = stmt.executeQuery("SELECT clientID,clientname,clientaddress,clientemail,clientphone,shippingarea" +
+                        " FROM client WHERE shippingarea LIKE ('%"+SearchFieldClient.getText()+"%')");
                 CustomerTable.getItems().clear();
                 CustomerTable.getColumns().clear();
                 for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
@@ -493,6 +557,376 @@ public class Controller {
                     CustomerList.add(row);
                 }
                 CustomerTable.setItems(CustomerList);
+                break;
+            default: break;
+        }
+        //ResultSet rs = stmt.executeQuery("SELECT * FROM client WHERE ");
+    }
+    public void searchStaffmemberDB() throws SQLException {
+        Statement stmt = con.createStatement();
+        staffmemberTable.getItems().clear();
+        staffmemberTable.getColumns().clear();
+        ResultSet rs;
+        switch (choiceBoxStaffSearch.getValue().toString()){
+            case "staffID":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE staffID = "+SearchFieldStaff.getText());
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
+                break;
+            case "staffname":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE staffname LIKE ('%" +SearchFieldStaff.getText()+"'%)");
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
+                break;
+            case "staffphone":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE staffphone LIKE ('%" +SearchFieldStaff.getText()+"%')");
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
+                break;
+            case "staffemail":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE staffemail LIKE ('%" +SearchFieldStaff.getText()+"%')");
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
+                break;
+            case "staffaddress":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE staffaddress LIKE ('%" +SearchFieldStaff.getText()+"%')");
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
+                break;
+            case "staffsvnumber":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE staffsvnumber LIKE ('%" +SearchFieldStaff.getText()+"%')");
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
+                break;
+            case "role":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE role LIKE ('%" +SearchFieldStaff.getText()+"%')");
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
+                break;
+            case "shippingarea":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE shippingarea LIKE ('%" +SearchFieldStaff.getText()+"%')");
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
+                break;
+            case "teamname":
+                rs = stmt.executeQuery("SELECT sm.staffID," +
+                        "sm.staffname," +
+                        "sm.staffphone," +
+                        "sm.staffemail," +
+                        "sm.staffaddress," +
+                        "sm.staffsvnumber," +
+                        "sm.role," +
+                        "st.shippingarea," +
+                        "st.teamname " +
+                        "FROM staffmember sm " +
+                        "INNER JOIN shippingteam st " +
+                        "ON sm.shippingteamID = st.shippingteamID " +
+                        "WHERE st.teamname LIKE ('%" +SearchFieldStaff.getText()+"%')");
+
+                for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+                    // We are using non property style for making dynamic table
+                    final int j = i;
+                    TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+                    col.setCellValueFactory(
+                            new Callback<
+                                    TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                                public ObservableValue<String> call(
+                                        TableColumn.CellDataFeatures<ObservableList, String> param) {
+                                    return new SimpleStringProperty(param.getValue().get(j).toString());
+                                }
+                            });
+                    staffmemberTable.getColumns().addAll(col);
+                }
+                while (rs.next()) {
+                    // Iterate Row
+                    ObservableList<String> row = FXCollections.observableArrayList();
+                    for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                        // Iterate Column
+                        row.add(rs.getString(i));
+                    }
+                    staffmemberList.add(row);
+                }
+                staffmemberTable.setItems(staffmemberList);
                 break;
             default: break;
         }
@@ -1102,6 +1536,11 @@ public class Controller {
         productTable.getColumns().clear();
         createProductTable();
     }
+    public void showAllClients() throws SQLException {
+        CustomerTable.getItems().clear();
+        CustomerTable.getColumns().clear();
+        createProductTable();
+    }
     public void itemsToRestock() throws SQLException {
         productTable.getItems().clear();
         productTable.getColumns().clear();
@@ -1139,5 +1578,104 @@ public class Controller {
             productList.add(row);
         }
         productTable.setItems(productList);
+    }
+    public void createStaffmemberTable() throws SQLException {
+        Statement stmt;
+        stmt = con.createStatement();
+
+        // Execute Query for the CoffeeTable data
+        ResultSet rs =
+                stmt.executeQuery(
+                        "SELECT sm.staffID,sm.staffname,sm.staffphone,sm.staffemail," +
+                                "sm.staffaddress,sm.staffsvnumber,sm.role,st.shippingarea,st.teamname FROM staffmember sm " +
+                                "INNER JOIN shippingteam st ON sm.shippingteamID = st.shippingteamID WHERE 1");
+
+        // Filling CoffeeTable with data
+        for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+            // We are using non property style for making dynamic table
+            final int j = i;
+            TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+            col.setCellValueFactory(
+                    new Callback<
+                            TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                        public ObservableValue<String> call(
+                                TableColumn.CellDataFeatures<ObservableList, String> param) {
+                            return new SimpleStringProperty(param.getValue().get(j).toString());
+                        }
+                    });
+            staffmemberTable.getColumns().addAll(col);
+        }
+        while (rs.next()) {
+            // Iterate Row
+            ObservableList<String> row = FXCollections.observableArrayList();
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                // Iterate Column
+                row.add(rs.getString(i));
+            }
+            staffmemberList.add(row);
+        }
+        staffmemberTable.setItems(staffmemberList);
+    }
+    public void createOrderTable() throws SQLException {
+        Statement stmt = con.createStatement();
+
+        // Execute Query for the CoffeeTable data
+        ResultSet rs =
+                stmt.executeQuery(
+                        "SELECT o.orderID,o.status,o.total,o.date" +
+                                ",c.clientname,c.clientaddress,c.clientemail,c.clientphone,c.shippingarea,s.teamname " +
+                                " FROM ordertab o INNER JOIN client c ON o.clientID = c.clientID INNER JOIN shippingteam s" +
+                                " ON o.shippingteamID_FK = s.shippingteamID WHERE 1");
+
+        // Filling CoffeeTable with data
+        for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+            // We are using non property style for making dynamic table
+            final int j = i;
+            TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+            col.setCellValueFactory(
+                    new Callback<
+                            TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>() {
+                        public ObservableValue<String> call(
+                                TableColumn.CellDataFeatures<ObservableList, String> param) {
+                            return new SimpleStringProperty(param.getValue().get(j).toString());
+                        }
+                    });
+            orderTable.getColumns().addAll(col);
+        }
+        while (rs.next()) {
+            // Iterate Row
+            ObservableList<String> row = FXCollections.observableArrayList();
+            for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                // Iterate Column
+                row.add(rs.getString(i));
+            }
+            order2List.add(row);
+        }
+        orderTable.setItems(order2List);
+    }
+    public void selectStaff() throws SQLException {
+        //System.out.println("Staff selected");
+        String selectedItem = staffmemberTable.getSelectionModel().getSelectedItem().toString();
+        String buff[] = selectedItem.split(", ");
+        String buffID = buff[0].substring(1);
+        Statement stmt = con.createStatement();
+    ResultSet rs =
+        stmt.executeQuery(
+            "SELECT * FROM staffmember sm "
+                + "INNER JOIN shippingteam st ON sm.shippingteamID = st.shippingteamID "
+                + "WHERE staffID = '"
+                + buffID
+                + "'");
+        while (rs.next()){
+            staffIDText.setText(rs.getString("staffID"));
+            choiceBoxRole.setValue(rs.getString("role"));
+            staffnameText.setText(rs.getString("staffname"));
+            choiceBoxShippingarea.setValue(rs.getString("shippingarea"));
+            staffemailText.setText(rs.getString("staffemail"));
+            staffsvnumberText.setText(rs.getString("staffsvnumber"));
+            staffphoneText.setText(rs.getString("staffphone"));
+            staffaddressText.setText(rs.getString("staffaddress"));
+            choiceBoxTeam.setValue(rs.getString("teamname"));
+        }
     }
 }
