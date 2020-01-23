@@ -21,7 +21,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <AnchorPane id="a1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #404040;" stylesheets="@style.css">
+      <AnchorPane id="a1" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="704.0" prefWidth="1200.0" style="-fx-background-color: #404040;" stylesheets="@style.css">
          <children>
             <TabPane id="bigTabs" layoutX="19.0" layoutY="160.0" prefHeight="527.0" prefWidth="438.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
