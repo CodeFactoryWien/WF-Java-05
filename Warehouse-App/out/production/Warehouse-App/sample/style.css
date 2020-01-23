@@ -232,6 +232,12 @@ ChoiceBox {
     -fx-background-color: #404040;
 }
 
+#textareaID:hover {
+    -fx-border-color: #e6da02;
+    -fx-font-weight: bold;
+    -fx-border-width: 1.5;
+}
+
 ChoiceBox:hover {
     -fx-border-color: #eaff00;
     -fx-border-width: 1.8;

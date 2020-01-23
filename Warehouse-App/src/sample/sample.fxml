@@ -18,7 +18,7 @@
 
 <VBox id="a1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" style="-fx-background-color: #404040;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1176.0">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0">
          <children>
             <TabPane layoutY="6.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="667.0" prefWidth="1172.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
@@ -160,7 +160,7 @@
                               <ChoiceBox fx:id="choiceBoxSearchProduct" layoutX="70.0" layoutY="58.0" prefWidth="150.0" />
                               <TextField fx:id="SearchFieldProduct" layoutX="232.0" layoutY="58.0" prefHeight="25.0" prefWidth="209.0" />
                               <Button layoutX="455.0" layoutY="59.0" mnemonicParsing="false" onAction="#searchProductDB" text="Search" />
-                              <Button layoutX="520.0" layoutY="59.0" mnemonicParsing="false" text="Show all products" />
+                              <Button layoutX="520.0" layoutY="59.0" mnemonicParsing="false" onAction="#showAllProducts" text="Show all products" />
                               <Button layoutX="648.0" layoutY="59.0" mnemonicParsing="false" onAction="#itemsToRestock" text="reorder products" />
                               <TabPane id="bigTabs" layoutX="816.0" layoutY="21.0" prefHeight="615.0" prefWidth="345.0" tabClosingPolicy="UNAVAILABLE">
                                 <tabs>
@@ -244,6 +244,87 @@
                            </children></AnchorPane>
                   </content>
                 </Tab>
+                  <Tab id="listTabs" text="Staffmembers">
+                      <AnchorPane>
+                          <children>
+                              <TableView fx:id="staffmemberTable" layoutX="8.0" layoutY="247.0" onMouseClicked="#selectStaff" prefHeight="390.0" prefWidth="1039.0" />
+                              <Label layoutX="15.0" layoutY="59.0" text="Search:" />
+                              <ChoiceBox fx:id="choiceBoxStaffSearch" layoutX="70.0" layoutY="58.0" prefWidth="150.0" />
+                              <TextField fx:id="SearchFieldStaff" layoutX="232.0" layoutY="58.0" prefHeight="25.0" prefWidth="209.0" />
+                              <Button layoutX="455.0" layoutY="59.0" mnemonicParsing="false" onAction="#searchStaffmemberDB" prefHeight="25.0" prefWidth="54.0" text="Search" />
+                              <TabPane layoutX="9.0" layoutY="101.0" prefHeight="138.0" prefWidth="987.0" style="-fx-background-color: transparent;" tabClosingPolicy="UNAVAILABLE">
+                                  <tabs>
+                                      <Tab id="listTabs" text="Edit Staffmember">
+                                          <content>
+                                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="108.0" prefWidth="987.0" style="-fx-background-color: transparent;">
+                                                  <children>
+                                                      <Label layoutX="8.0" layoutY="4.0" text="Staffname:" />
+                                                      <TextField fx:id="staffnameText" layoutX="8.0" layoutY="21.0" prefHeight="27.0" prefWidth="228.0" />
+                                                      <Label layoutX="8.0" layoutY="57.0" text="Staffphone:" />
+                                                      <TextField fx:id="staffphoneText" layoutX="8.0" layoutY="74.0" prefHeight="27.0" prefWidth="228.0" />
+                                                      <Label layoutX="253.0" layoutY="57.0" text="Staffemail:" />
+                                                      <TextField fx:id="staffemailText" layoutX="253.0" layoutY="74.0" prefHeight="27.0" prefWidth="228.0" />
+                                                      <Label layoutX="253.0" layoutY="4.0" text="Staffaddress:" />
+                                                      <TextField fx:id="staffaddressText" layoutX="251.0" layoutY="21.0" prefHeight="27.0" prefWidth="228.0" />
+                                                      <Label layoutX="496.0" layoutY="57.0" text="Staffsvnumber:" />
+                                                      <TextField fx:id="staffsvnumberText" layoutX="495.0" layoutY="74.0" prefHeight="27.0" prefWidth="80.0" />
+                                                      <Label layoutX="590.0" layoutY="4.0" text="Role:" />
+                                                      <ChoiceBox fx:id="choiceBoxRole" layoutX="588.0" layoutY="21.0" prefWidth="120.0" />
+                                                      <ChoiceBox fx:id="choiceBoxShippingarea" layoutX="723.0" layoutY="21.0" prefWidth="120.0" />
+                                                      <Label layoutX="723.0" layoutY="4.0" text="Shippingarea:" />
+                                                      <Label layoutX="496.0" layoutY="4.0" text="StaffID:" />
+                                                      <TextField fx:id="staffIDText" layoutX="494.0" layoutY="21.0" prefHeight="0.0" prefWidth="80.0" />
+                                                      <Button layoutX="595.0" layoutY="74.0" mnemonicParsing="false" onAction="#updateStaff" text="Edit" />
+                                                      <Button id="deletebtn" layoutX="647.0" layoutY="74.0" mnemonicParsing="false" onAction="#deleteStaff" text="Delete" />
+                                                  </children>
+                                              </AnchorPane>
+                                          </content>
+                                      </Tab>
+                                      <Tab id="listTabs" text="Add Staffmember">
+                                          <content>
+                                              <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="118.0" prefWidth="987.0" style="-fx-background-color: transparent;">
+                                                  <children>
+                                                      <TextField fx:id="staffnameText1" layoutX="8.0" layoutY="21.0" prefWidth="228.0" />
+                                                      <Label layoutX="8.0" layoutY="4.0" text="Staffname:" />
+                                                      <TextField fx:id="staffphoneText1" layoutX="8.0" layoutY="74.0" prefWidth="228.0" />
+                                                      <Label layoutX="8.0" layoutY="57.0" text="Staffphone:" />
+                                                      <TextField fx:id="staffemailText1" layoutX="253.0" layoutY="74.0" />
+                                                      <Label layoutX="253.0" layoutY="57.0" text="Staffemail:" />
+                                                      <TextField fx:id="staffaddressText1" layoutX="251.0" layoutY="21.0" />
+                                                      <Label layoutX="253.0" layoutY="4.0" text="Staffaddress:" />
+                                                      <TextField fx:id="staffsvnumberText1" layoutX="419.0" layoutY="21.0" />
+                                                      <Label layoutX="419.0" layoutY="3.0" text="Staffsvnumber:" />
+                                                      <ChoiceBox fx:id="choiceBoxRole1" layoutX="587.0" layoutY="21.0" prefWidth="120.0" />
+                                                      <Label layoutX="587.0" layoutY="4.0" text="Role:" />
+                                                      <ChoiceBox fx:id="choiceBoxShippingarea1" layoutX="722.0" layoutY="21.0" prefWidth="120.0" />
+                                                      <Label layoutX="722.0" layoutY="4.0" text="Shippingarea:" />
+                                                      <Button layoutX="427.0" layoutY="75.0" mnemonicParsing="false" onAction="#addStaff" text="Add" />
+                                                  </children>
+                                              </AnchorPane>
+                                          </content>
+                                      </Tab>
+                                  </tabs>
+                              </TabPane>
+                           <Label id="topID" layoutX="12.0" layoutY="11.0" text="Warehouse-App || Staffmembers-Management">
+                              <font>
+                                 <Font name="System Bold" size="20.0" />
+                              </font>
+                              <textFill>
+                                 <LinearGradient endX="1.0" endY="1.0">
+                                    <stops>
+                                       <Stop color="BLACK" />
+                                       <Stop color="WHITE" offset="1.0" />
+                                    </stops>
+                                 </LinearGradient>
+                              </textFill>
+                           </Label>
+                           <ImageView fitHeight="52.0" fitWidth="52.0" layoutX="421.0" layoutY="-2.0">
+                              <image>
+                                 <Image url="@completed.png" />
+                              </image>
+                           </ImageView>
+                          </children></AnchorPane>
+                  </Tab>
               </tabs>
             </TabPane>
          </children>

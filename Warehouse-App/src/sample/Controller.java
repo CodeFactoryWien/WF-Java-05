@@ -93,7 +93,7 @@ public class Controller {
         createCostumerTable();
         createProductTable();
         createStaffmemberTable();
-        createOrderTable();
+        /*createOrderTable();*/
         Statement statement = con.createStatement();
         ResultSet rs =
                 statement.executeQuery(
@@ -103,21 +103,21 @@ public class Controller {
             choiceBoxSearchClient.getItems().add(rs.getMetaData().getColumnName(i + 1));
         }
         choiceBoxSearchClient.setValue("-- Select Option --");
-    rs =
-        statement.executeQuery(
-            "SELECT sm.staffID," +
-                    "sm.staffname," +
-                    "sm.staffphone," +
-                    "sm.staffemail," +
-                    "sm.staffaddress," +
-                    "sm.staffsvnumber," +
-                    "sm.role," +
-                    "st.shippingarea," +
-                    "st.teamname " +
-                    "FROM staffmember sm " +
-                    "INNER JOIN shippingteam st " +
-                    "ON sm.shippingteamID = st.shippingteamID " +
-                    "WHERE 1");
+        rs =
+                statement.executeQuery(
+                        "SELECT sm.staffID," +
+                                "sm.staffname," +
+                                "sm.staffphone," +
+                                "sm.staffemail," +
+                                "sm.staffaddress," +
+                                "sm.staffsvnumber," +
+                                "sm.role," +
+                                "st.shippingarea," +
+                                "st.teamname " +
+                                "FROM staffmember sm " +
+                                "INNER JOIN shippingteam st " +
+                                "ON sm.shippingteamID = st.shippingteamID " +
+                                "WHERE 1");
         choiceBoxStaffSearch.getItems().add("-- Select Option --");
         for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
             choiceBoxStaffSearch.getItems().add(rs.getMetaData().getColumnName(i + 1));
@@ -1086,7 +1086,7 @@ public class Controller {
                 break;
             case "manuname":
                 rs = stmt.executeQuery(" SELECT p.productID,p.category,p.productname,p.description,p.location,m.manuname " +
-                                "FROM product p INNER JOIN manufacturer m ON p.manuID = m.manuID "+
+                        "FROM product p INNER JOIN manufacturer m ON p.manuID = m.manuID "+
                         "WHERE shippingarea LIKE ('%"+SearchFieldProduct.getText()+"%')");
                 productTable.getItems().clear();
                 productTable.getColumns().clear();
@@ -1371,9 +1371,9 @@ public class Controller {
         stmt.execute("UPDATE `client`" +
                 " SET `username`= '"+ usernameText.getText() +
                 "',`password`= '" + passwordText.getText()+ "' WHERE clientID = "+clientIDText.getText());
-    ResultSet rs =
-        stmt.executeQuery(
-            "SELECT username,password FROM client WHERE clientID = " + clientIDText.getText());
+        ResultSet rs =
+                stmt.executeQuery(
+                        "SELECT username,password FROM client WHERE clientID = " + clientIDText.getText());
         for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
             // We are using non property style for making dynamic table
             final int j = i;
@@ -1659,13 +1659,13 @@ public class Controller {
         String buff[] = selectedItem.split(", ");
         String buffID = buff[0].substring(1);
         Statement stmt = con.createStatement();
-    ResultSet rs =
-        stmt.executeQuery(
-            "SELECT * FROM staffmember sm "
-                + "INNER JOIN shippingteam st ON sm.shippingteamID = st.shippingteamID "
-                + "WHERE staffID = '"
-                + buffID
-                + "'");
+        ResultSet rs =
+                stmt.executeQuery(
+                        "SELECT * FROM staffmember sm "
+                                + "INNER JOIN shippingteam st ON sm.shippingteamID = st.shippingteamID "
+                                + "WHERE staffID = '"
+                                + buffID
+                                + "'");
         while (rs.next()){
             staffIDText.setText(rs.getString("staffID"));
             choiceBoxRole.setValue(rs.getString("role"));
