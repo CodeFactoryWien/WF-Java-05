@@ -8,6 +8,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -113,6 +115,11 @@
                               <ChoiceBox fx:id="choiceBoxSearchClient" layoutX="70.0" layoutY="58.0" prefWidth="150.0" />
                               <TextField fx:id="SearchFieldClient" layoutX="232.0" layoutY="58.0" prefHeight="25.0" prefWidth="209.0" />
                               <Button layoutX="455.0" layoutY="59.0" mnemonicParsing="false" onAction="#searchClientDB" text="Search" />
+                              <ImageView fitHeight="50.0" fitWidth="100.0" layoutX="347.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../ClientApp/src/sample/deliver.gif" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                   </content>

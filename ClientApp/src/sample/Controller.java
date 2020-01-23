@@ -376,7 +376,7 @@ public class Controller {
             + " ,productname: "
             + productnameText.getText()
             + " "
-            + ",amount: "
+            + " ,amount: "
             + amountText.getText()
             + " ,subtotal: "
             + total
@@ -411,7 +411,7 @@ public class Controller {
             + " ,productname: "
             + productnameText.getText()
             + " "
-            + ",amount: "
+            + " ,amount: "
             + amountText.getText()
             + " ,subtotal: "
             + total
@@ -641,13 +641,14 @@ public class Controller {
         Statement stmt = con.createStatement();
         ObservableList allprodutsList = FXCollections.observableArrayList();
         ResultSet rs;
+      allproducts.getItems().clear();
+      allproducts.getColumns().clear();
         switch (selectProductCategory.getValue().toString()){
             case "productID":
                 rs = stmt.executeQuery("SELECT productID,productname,singleprice,bulkprice,instock " +
                         "FROM product WHERE instock <> 0 AND productID = '"+searchText.getText()+"'");
                 System.out.println("Query Send");
-                allproducts.getItems().clear();
-                allproducts.getColumns().clear();
+
                 for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
                     // We are using non property style for making dynamic table
                     final int j = i;

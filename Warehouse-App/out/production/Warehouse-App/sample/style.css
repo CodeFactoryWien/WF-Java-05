@@ -116,8 +116,7 @@ TableView {
 
 .table-view .column-header-background .filler {
     -fx-background-color:  #595959;
-    -fx-border-color: #595959;
-    -fx-border-radius: 3;
+    -fx-border-color: transparent;
 }
 
 .table-view .column-header {
