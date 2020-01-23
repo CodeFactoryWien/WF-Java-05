@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 21. Jan 2020 um 10:52
+-- Erstellungszeit: 23. Jan 2020 um 08:52
 -- Server-Version: 10.4.10-MariaDB
 -- PHP-Version: 7.3.12
 
@@ -46,7 +46,7 @@ CREATE TABLE `client` (
 INSERT INTO `client` (`clientID`, `username`, `password`, `clientname`, `clientaddress`, `clientemail`, `clientphone`, `shippingarea`) VALUES
 (1, 'user1', 'password1', 'Mister Hemp', 'Landstraße 72, 4020 Linz', 'hemp@green.com', '+4366412349330', 'NORD'),
 (2, 'user2', 'password2', 'Super Trooper', 'Weitwegweg 999, 1060 Wien', 'trooper@deathstar.com', '+43680596404', 'OST'),
-(3, 'user3', 'password3', 'Daniela Tunichtgut', 'Josefgasse 11, 9020 Klagenfurt', 'unfug@bledsinn.com', '+436763049404', 'SÜD'),
+(3, 'user3', 'password3', 'user3', 'password3, Daniela Tunichtgut', 'Josefgasse 11', '9020 Klagenfurt', 'WEST'),
 (4, 'user4', 'password4', 'John Wick', 'Brennendes Höllentor 666, 6020 Innsbruck', 'john@wick.com', '+436649787775', 'WEST'),
 (5, 'user5', 'password5', 'Matthias Riedl', 'Kettenbrückengasse 23, 4020 Linz', 'matthias.riedl@expleo.com', '+43664523449', 'NORD'),
 (6, 'user6', 'password6', 'Wolfgang Figl', 'Musterweg 34, 1040 Wien', 'wolfgang.figl@expleo.com', '+436761234098', 'OST'),
@@ -59,7 +59,9 @@ INSERT INTO `client` (`clientID`, `username`, `password`, `clientname`, `clienta
 (13, 'user13', 'password13', 'Hermine Granger', 'Muggelweg 45, 4020 Linz', 'hermineg@wizzard.wz', '+436993567544', 'NORD'),
 (14, 'user14', 'password14', 'Dobby Elf', 'Winkelgasse 1, 1210 Wien', 'dobbyelf@gmail.com', '+436808887754', 'OST'),
 (15, 'user15', 'password15', 'Martina Haselnuss', 'Nussgasse 42, 9020 Klagenfurt', 'nusserl@spongebob.com', '+4366022233444', 'SÜD'),
-(16, 'user16', 'password16', 'Sigmund Ferdanz', 'Stummergasse 6, 6020 Innsbruck', 'sigi@hotmail.com', '+43664122233', 'WEST');
+(16, 'user16', 'password16', 'Sigmund Ferdanz', 'Stummergasse 6, 6020 Innsbruck', 'sigi@hotmail.com', '+43664122233', 'WEST'),
+(17, 'user17', 'password17', 'Mex', 'Theflex', 'flexible@flexi.com', '+43664272233', 'NORD'),
+(18, 'user18', 'password18', 'Kurt Klima', 'Mühlenweg 8, 1220 Wien', 'mm@mm.com', '+436645362800', 'OST');
 
 -- --------------------------------------------------------
 
@@ -207,7 +209,9 @@ INSERT INTO `orderlist` (`orderlistID`, `orderID_FK`) VALUES
 (19, 19),
 (20, 20),
 (21, 21),
-(22, 22);
+(22, 22),
+(23, 23),
+(24, 24);
 
 -- --------------------------------------------------------
 
@@ -230,7 +234,7 @@ CREATE TABLE `ordertab` (
 
 INSERT INTO `ordertab` (`orderID`, `status`, `total`, `date`, `clientID`, `shippingteamID_FK`) VALUES
 (1, 'Order received', 679.99, '2020-01-05', 1, 1),
-(2, 'Order received', 799.99, '2020-01-12', 2, 2),
+(2, 'Order received', 420.99, '2020-01-12', 2, 2),
 (3, 'Order sent', 599.99, '2020-01-09', 3, 3),
 (4, 'Order received', 99.79, '2020-01-12', 4, 4),
 (5, 'Order received', 1129.89, '2019-12-18', 5, 1),
@@ -250,7 +254,9 @@ INSERT INTO `ordertab` (`orderID`, `status`, `total`, `date`, `clientID`, `shipp
 (19, 'Order received', 11, '2020-01-19', 3, 1),
 (20, 'Order received', 17, '2020-01-13', 4, 1),
 (21, '0', 11.4, '2020-01-21', 1, NULL),
-(22, '0', 11.4, '2020-01-21', 1, NULL);
+(22, '0', 11.4, '2020-01-21', 1, NULL),
+(23, 'Orders received', 8.25, '2020-01-22', 1, 1),
+(24, 'Orders received', 14.3, '2020-01-22', 5, 1);
 
 -- --------------------------------------------------------
 
@@ -306,7 +312,7 @@ INSERT INTO `product` (`productID`, `category`, `productname`, `description`, `i
 (28, 'Coffee', 'Milano', 'Coffee made with whipped cream with milk added on some occasions.', 796, 4.79, 4.49, 1, 'Zone 2', 2),
 (29, 'Energy Drinks', 'Hempy Energy', 'Get the natural energy kick from hemp!', 56, 1.49, 1.29, 1, 'Zone 4', 4),
 (30, 'Energy Drinks', 'Melon Insanity', 'Fruity melon explosion in your mouth!', 9, 1.79, 1.59, 1, 'Zone 4', 4),
-(31, 'Energy Drinks', 'Core Energizer', 'The name says all!', 6, 1.09, 0.99, 1, 'Zone 4', 4),
+(31, 'Energy Drinks', 'Core Energizer', 'The name says all!', 6, 1.09, 0.99, 1, '-- Select Option --', 4),
 (32, 'Tea', 'White Tea', 'Naturally sweet, delicate taste with a balance of floral and fruity undertones.', 190, 1.89, 1.69, 1, 'Zone 1', 1),
 (33, 'Tea', 'Mate Tea', 'Mate tea comes from the South American yerba plant, and the leaves are blanched, dried, aged, and cut into loose leaf tea.', 106, 1.49, 1.39, 1, 'Zone 1', 1),
 (34, 'Tea', 'Rooibos Tea', 'Naturally sweet, and can have warm, nutty, or vanilla tones.', 438, 1.39, 1.29, 1, 'Zone 1', 1),
@@ -334,9 +340,12 @@ CREATE TABLE `productorderlist` (
 INSERT INTO `productorderlist` (`orderlistID_FK`, `productID_FK`, `amount`, `subtotal`) VALUES
 (5, 0, 10, 83.9),
 (1, 1, 5, 6.45),
+(24, 1, 3, 3.87),
 (2, 4, 67, 64.99),
 (4, 5, 500, 610),
+(23, 5, 2, 3.18),
 (4, 6, 760, 980.4),
+(23, 6, 3, 5.07),
 (5, 9, 10, 25.9),
 (2, 10, 123, 183.27),
 (5, 12, 10, 17.9),
@@ -350,6 +359,7 @@ INSERT INTO `productorderlist` (`orderlistID_FK`, `productID_FK`, `amount`, `sub
 (2, 28, 20, 89.8),
 (3, 28, 54, 242.46),
 (6, 29, 300, 387),
+(24, 33, 7, 10.43),
 (1, 35, 4, 3.56),
 (3, 35, 100, 79),
 (3, 36, 100, 79),
@@ -553,7 +563,7 @@ ALTER TABLE `staffmember`
 -- AUTO_INCREMENT für Tabelle `client`
 --
 ALTER TABLE `client`
-  MODIFY `clientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `clientID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT für Tabelle `dispatcher`
@@ -571,13 +581,13 @@ ALTER TABLE `manufacturer`
 -- AUTO_INCREMENT für Tabelle `orderlist`
 --
 ALTER TABLE `orderlist`
-  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `orderlistID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT für Tabelle `ordertab`
 --
 ALTER TABLE `ordertab`
-  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `orderID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT für Tabelle `product`
