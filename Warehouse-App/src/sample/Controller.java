@@ -21,12 +21,17 @@ public class Controller {
     @FXML private TableView productTable;
     @FXML private TextArea descriptionText;
     @FXML private TextArea descriptionText1;
+    @FXML private TextField staffnameText1;
+    @FXML private TextField staffphoneText1;
+    @FXML private TextField staffemailText1;
+    @FXML private TextField staffaddressText1;
     @FXML private TextField staffnameText;
     @FXML private TextField staffphoneText;
     @FXML private TextField staffemailText;
     @FXML private TextField staffaddressText;
     @FXML private TextField staffIDText;
     @FXML private TextField staffsvnumberText;
+    @FXML private TextField staffsvnumberText1;
     @FXML private TextField singlePriceText;
     @FXML private TextField bulkpriceText;
     @FXML private TextField instockText;
@@ -70,6 +75,8 @@ public class Controller {
     @FXML private ChoiceBox choiceBoxTeam;
     @FXML private ChoiceBox choiceBoxRole;
     @FXML private ChoiceBox choiceBoxShippingarea;
+    @FXML private ChoiceBox choiceBoxRole1;
+    @FXML private ChoiceBox choiceBoxShippingarea1;
 
     private Connection con;
     DatabaseMetaData meta;
@@ -93,7 +100,7 @@ public class Controller {
         createCostumerTable();
         createProductTable();
         createStaffmemberTable();
-        /*createOrderTable();*/
+        //createOrderTable();
         Statement statement = con.createStatement();
         ResultSet rs =
                 statement.executeQuery(
@@ -103,21 +110,21 @@ public class Controller {
             choiceBoxSearchClient.getItems().add(rs.getMetaData().getColumnName(i + 1));
         }
         choiceBoxSearchClient.setValue("-- Select Option --");
-        rs =
-                statement.executeQuery(
-                        "SELECT sm.staffID," +
-                                "sm.staffname," +
-                                "sm.staffphone," +
-                                "sm.staffemail," +
-                                "sm.staffaddress," +
-                                "sm.staffsvnumber," +
-                                "sm.role," +
-                                "st.shippingarea," +
-                                "st.teamname " +
-                                "FROM staffmember sm " +
-                                "INNER JOIN shippingteam st " +
-                                "ON sm.shippingteamID = st.shippingteamID " +
-                                "WHERE 1");
+    rs =
+        statement.executeQuery(
+            "SELECT sm.staffID," +
+                    "sm.staffname," +
+                    "sm.staffphone," +
+                    "sm.staffemail," +
+                    "sm.staffaddress," +
+                    "sm.staffsvnumber," +
+                    "sm.role," +
+                    "st.shippingarea," +
+                    "st.teamname " +
+                    "FROM staffmember sm " +
+                    "INNER JOIN shippingteam st " +
+                    "ON sm.shippingteamID = st.shippingteamID " +
+                    "WHERE 1");
         choiceBoxStaffSearch.getItems().add("-- Select Option --");
         for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
             choiceBoxStaffSearch.getItems().add(rs.getMetaData().getColumnName(i + 1));
@@ -192,12 +199,12 @@ public class Controller {
         choiceBoxArea1.getItems().add("NORD");
         choiceBoxArea1.setValue("-- Select Option --");
 
-        choiceBoxTeam.getItems().add("-- Select Option --");
-        choiceBoxTeam.getItems().add("A");
-        choiceBoxTeam.getItems().add("B");
-        choiceBoxTeam.getItems().add("C");
-        choiceBoxTeam.getItems().add("D");
-        choiceBoxTeam.setValue("-- Select Option --");
+        //choiceBoxTeam.getItems().add("-- Select Option --");
+        //choiceBoxTeam.getItems().add("A");
+        //choiceBoxTeam.getItems().add("B");
+        //choiceBoxTeam.getItems().add("C");
+        //choiceBoxTeam.getItems().add("D");
+        //choiceBoxTeam.setValue("-- Select Option --");
 
         choiceBoxRole.getItems().add("-- Select Option --");
         choiceBoxRole.getItems().add("IT");
@@ -212,6 +219,20 @@ public class Controller {
         choiceBoxShippingarea.getItems().add("OST");
         choiceBoxShippingarea.getItems().add("NORD");
         choiceBoxShippingarea.setValue("-- Select Option --");
+
+        choiceBoxRole1.getItems().add("-- Select Option --");
+        choiceBoxRole1.getItems().add("IT");
+        choiceBoxRole1.getItems().add("Accounting");
+        choiceBoxRole1.getItems().add("Sales");
+        choiceBoxRole1.getItems().add("Warehouse Worker");
+        choiceBoxRole1.setValue("-- Select Option --");
+
+        choiceBoxShippingarea1.getItems().add("-- Select Option --");
+        choiceBoxShippingarea1.getItems().add("WEST");
+        choiceBoxShippingarea1.getItems().add("SÜD");
+        choiceBoxShippingarea1.getItems().add("OST");
+        choiceBoxShippingarea1.getItems().add("NORD");
+        choiceBoxShippingarea1.setValue("-- Select Option --");
     }
     public void createCostumerTable() throws SQLException {
 
@@ -1086,7 +1107,7 @@ public class Controller {
                 break;
             case "manuname":
                 rs = stmt.executeQuery(" SELECT p.productID,p.category,p.productname,p.description,p.location,m.manuname " +
-                        "FROM product p INNER JOIN manufacturer m ON p.manuID = m.manuID "+
+                                "FROM product p INNER JOIN manufacturer m ON p.manuID = m.manuID "+
                         "WHERE shippingarea LIKE ('%"+SearchFieldProduct.getText()+"%')");
                 productTable.getItems().clear();
                 productTable.getColumns().clear();
@@ -1371,9 +1392,9 @@ public class Controller {
         stmt.execute("UPDATE `client`" +
                 " SET `username`= '"+ usernameText.getText() +
                 "',`password`= '" + passwordText.getText()+ "' WHERE clientID = "+clientIDText.getText());
-        ResultSet rs =
-                stmt.executeQuery(
-                        "SELECT username,password FROM client WHERE clientID = " + clientIDText.getText());
+    ResultSet rs =
+        stmt.executeQuery(
+            "SELECT username,password FROM client WHERE clientID = " + clientIDText.getText());
         for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
             // We are using non property style for making dynamic table
             final int j = i;
@@ -1659,13 +1680,13 @@ public class Controller {
         String buff[] = selectedItem.split(", ");
         String buffID = buff[0].substring(1);
         Statement stmt = con.createStatement();
-        ResultSet rs =
-                stmt.executeQuery(
-                        "SELECT * FROM staffmember sm "
-                                + "INNER JOIN shippingteam st ON sm.shippingteamID = st.shippingteamID "
-                                + "WHERE staffID = '"
-                                + buffID
-                                + "'");
+    ResultSet rs =
+        stmt.executeQuery(
+            "SELECT * FROM staffmember sm "
+                + "INNER JOIN shippingteam st ON sm.shippingteamID = st.shippingteamID "
+                + "WHERE staffID = '"
+                + buffID
+                + "'");
         while (rs.next()){
             staffIDText.setText(rs.getString("staffID"));
             choiceBoxRole.setValue(rs.getString("role"));
@@ -1675,7 +1696,94 @@ public class Controller {
             staffsvnumberText.setText(rs.getString("staffsvnumber"));
             staffphoneText.setText(rs.getString("staffphone"));
             staffaddressText.setText(rs.getString("staffaddress"));
-            choiceBoxTeam.setValue(rs.getString("teamname"));
+            //choiceBoxTeam.setValue(rs.getString("teamname"));
         }
+    }
+  public void updateStaff() throws SQLException {
+    Statement stmt = con.createStatement();
+    int k = 0;
+    switch (choiceBoxShippingarea.getValue().toString()) {
+      case "NORD":
+        k = 1;
+        break;
+      case "OST":
+        k = 2;
+        break;
+      case "SÜD":
+        k = 3;
+        break;
+      case "WEST":
+        k = 4;
+        break;
+      default:
+        break;
+    }
+    stmt.execute(
+        "UPDATE `staffmember` SET "
+            + "`staffname`='"
+            + staffnameText.getText()
+            + "',"
+            + "`staffphone`='"
+            + staffphoneText.getText()
+            + "',"
+            + "`staffemail`='"
+            + staffemailText.getText()
+            + "',"
+            + "`staffaddress`='"
+            + staffaddressText.getText()
+            + "',"
+            + "`staffsvnumber`='"
+            + staffsvnumberText.getText()
+            + "',"
+            + "`role`='"
+            + choiceBoxRole.getValue().toString()
+            + "',"
+            + "`shippingteamID`= '"
+            + k
+            + "' "
+            + " WHERE staffID ='"
+            + staffIDText.getText()
+            + "'");
+    staffmemberTable.getItems().clear();
+    staffmemberTable.getColumns().clear();
+    createStaffmemberTable();
+        }
+        public void deleteStaff() throws SQLException {
+            Statement stmt = con.createStatement();
+            stmt.execute("DELETE FROM `staffmember` WHERE staffID ='" +staffIDText.getText()+ "'");
+            staffmemberTable.getItems().clear();
+            staffmemberTable.getColumns().clear();
+            createStaffmemberTable();
+        }
+    public void addStaff() throws SQLException {
+        Statement stmt = con.createStatement();
+        int k = 0;
+        switch (choiceBoxShippingarea1.getValue().toString()){
+            case "NORD":
+                k=1;
+                break;
+            case "OST":
+                k=2;
+                break;
+            case "SÜD":
+                k=3;
+                break;
+            case "WEST":
+                k=4;
+                break;
+        }
+        stmt.execute("INSERT INTO `staffmember`" +
+                "(`staffname`, `staffphone`, `staffemail`, `staffaddress`, `staffsvnumber`, `role`, `shippingteamID`)" +
+                " VALUES " +
+                "('"+staffnameText1.getText()+"','" +
+                staffphoneText.getText()+"','" +
+                staffemailText1.getText()+"','" +
+                staffaddressText1.getText()+"','" +
+                staffsvnumberText1.getText()+"','" +
+                choiceBoxRole1.getValue().toString()+"','" +
+                k+"')");
+        staffmemberTable.getItems().clear();
+        staffmemberTable.getColumns().clear();
+        createStaffmemberTable();
     }
 }
